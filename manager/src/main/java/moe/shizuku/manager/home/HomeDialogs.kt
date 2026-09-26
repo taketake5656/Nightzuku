@@ -345,7 +345,7 @@ fun HomeAdbDiscoveryDialog(
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         WearText(stringResource(R.string.dialog_adb_discovery_message))
                         if (currentPort in 1..65535) {
-                            WearText("Discovered port: $currentPort", color = WearMaterialTheme.colorScheme.primary)
+                            WearText(stringResource(R.string.dialog_adb_discovered_port, currentPort), color = WearMaterialTheme.colorScheme.primary)
                         }
                     }
                 }
@@ -388,7 +388,7 @@ fun HomeAdbDiscoveryDialog(
                             color = TvMaterialTheme.colorScheme.primary
                         )
                         if (currentPort in 1..65535) {
-                            TvText("Discovered port: $currentPort", color = TvMaterialTheme.colorScheme.primary)
+                            TvText(stringResource(R.string.dialog_adb_discovered_port, currentPort), color = TvMaterialTheme.colorScheme.primary)
                         }
                     }
                 },

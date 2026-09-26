@@ -147,7 +147,7 @@ class ModuleWebViewActivity : AppActivity() {
                                         ) {
                                             item {
                                                 WearText(
-                                                    text = "WebView Error",
+                                                    text = stringResource(R.string.modules_webview_error_title),
                                                     textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                                                     modifier = Modifier.fillMaxWidth(),
                                                     color = WearMaterialTheme.colorScheme.error,
@@ -156,7 +156,7 @@ class ModuleWebViewActivity : AppActivity() {
                                             }
                                             item {
                                                 WearText(
-                                                    text = "WebView is not supported or crashed during initialization on this WearOS device.\n\n$errorMsg",
+                                                    text = stringResource(R.string.modules_webview_error_wear, errorMsg),
                                                     textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                                                     modifier = Modifier.fillMaxWidth()
                                                 )

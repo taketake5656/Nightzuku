@@ -436,12 +436,12 @@ fun WearCatalogScreen(
             WearAlertDialog(
                 visible = true,
                 onDismissRequest = { showDangerDialog = false },
-                title = { WearText("Potentially unsafe module") },
+                title = { WearText(stringResource(R.string.modules_catalog_danger_title)) },
                 confirmButton = {},
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         WearText(
-                            text = dangerReason ?: "Large content detected",
+                            text = dangerReason ?: stringResource(R.string.modules_catalog_danger_message),
                             style = WearMaterialTheme.typography.bodySmall,
                             color = WearMaterialTheme.colorScheme.error
                         )
@@ -450,14 +450,14 @@ fun WearCatalogScreen(
                             modifier = Modifier.fillMaxWidth(),
                             colors = WearButtonDefaults.buttonColors()
                         ) {
-                            WearText("Continue anyway")
+                            WearText(stringResource(R.string.modules_catalog_danger_continue))
                         }
                         WearButton(
                             onClick = { showDangerDialog = false },
                             modifier = Modifier.fillMaxWidth(),
                             colors = WearButtonDefaults.filledTonalButtonColors()
                         ) {
-                            WearText("Go back")
+                            WearText(stringResource(R.string.modules_catalog_danger_go_back))
                         }
                     }
                 }

@@ -321,6 +321,17 @@ With %1$s, in any terminal app, you can connect to and interact with the shell r
     <string name="modules_catalog_view_github">View on GitHub</string>
     <string name="modules_catalog_skip_token">Skip</string>
     <string name="modules_catalog_open">Open Catalog</string>
+    <string name="modules_catalog_installed">Installed</string>
+    <string name="modules_catalog_update">Update</string>
+    <string name="modules_catalog_back">Back</string>
+    <string name="modules_catalog_danger_title">Potentially unsafe module</string>
+    <string name="modules_catalog_danger_message">This module has unusually large content that may cause issues:</string>
+    <string name="modules_catalog_danger_confirm">Do you want to continue anyway?</string>
+    <string name="modules_catalog_danger_continue">Continue</string>
+    <string name="modules_catalog_danger_go_back">Go back</string>
+    <string name="modules_webview_error_title">WebView Error</string>
+    <string name="modules_webview_error_wear">WebView is not supported or crashed during initialization on this WearOS device.\n\n%1$s</string>
+    <string name="dialog_adb_discovered_port">Discovered port: %1$d</string>
 
     <!-- TV Status -->
     <string name="tv_status_active">ACTIVE</string>

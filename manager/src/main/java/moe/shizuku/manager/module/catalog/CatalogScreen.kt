@@ -259,7 +259,7 @@ fun CatalogScreen(onNavigateUp: () -> Unit) {
         if (installSuccess) {
             AlertDialog(
                 onDismissRequest = { installSuccess = false },
-                title = { Text(stringResource(R.string.modules_install_success, "")) },
+                title = { Text(stringResource(R.string.modules_catalog_install_success)) },
                 confirmButton = { TextButton(onClick = { installSuccess = false; onNavigateUp() }) { Text(stringResource(android.R.string.ok)) } }
             )
         }
@@ -267,11 +267,11 @@ fun CatalogScreen(onNavigateUp: () -> Unit) {
         if (showDangerDialog) {
             AlertDialog(
                 onDismissRequest = { showDangerDialog = false; pendingDangerModule = null },
-                title = { Text("Potentially unsafe module") },
+                title = { Text(stringResource(R.string.modules_catalog_danger_title)) },
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            text = "This module has unusually large content that may cause issues:",
+                            text = stringResource(R.string.modules_catalog_danger_message),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -280,7 +280,7 @@ fun CatalogScreen(onNavigateUp: () -> Unit) {
                                 Text(it, modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onErrorContainer)
                             }
                         }
-                        Text("Do you want to continue anyway?", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.modules_catalog_danger_confirm), style = MaterialTheme.typography.bodyMedium)
                     }
                 },
                 confirmButton = {
@@ -288,10 +288,10 @@ fun CatalogScreen(onNavigateUp: () -> Unit) {
                         showDangerDialog = false
                         detailModule = pendingDangerModule
                         pendingDangerModule = null
-                    }) { Text("Continue") }
+                    }) { Text(stringResource(R.string.modules_catalog_danger_continue)) }
                 },
                 dismissButton = {
-                    TextButton(onClick = { showDangerDialog = false; pendingDangerModule = null }) { Text("Go back") }
+                    TextButton(onClick = { showDangerDialog = false; pendingDangerModule = null }) { Text(stringResource(R.string.modules_catalog_danger_go_back)) }
                 }
             )
         }
@@ -371,7 +371,7 @@ private fun CatalogListScreen(
             item {
                 Surface(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp), shape = MaterialTheme.shapes.large, color = MaterialTheme.colorScheme.errorContainer) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(error ?: "Error", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onErrorContainer)
+                        Text(error ?: stringResource(R.string.modules_catalog_error), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onErrorContainer)
                     }
                 }
             }
@@ -478,7 +478,7 @@ private fun ModuleDetailScreen(
                 title = { Text(module.moduleName, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.modules_catalog_back))
                     }
                 },
                 actions = {
@@ -500,7 +500,7 @@ private fun ModuleDetailScreen(
                             onClick = { onInstall() }
                         ) {
                             Icon(Icons.Rounded.Update, null, modifier = Modifier.size(18.dp).padding(end = 6.dp))
-                            Text("Update", style = MaterialTheme.typography.labelLarge)
+                            Text(stringResource(R.string.modules_catalog_update), style = MaterialTheme.typography.labelLarge)
                         }
                     } else {
                         FilledTonalButton(
@@ -565,10 +565,10 @@ private fun ModuleDetailScreen(
                             onColor = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                         if (module.isOfficial) {
-                            DetailChip(text = "Official", color = MaterialTheme.colorScheme.tertiaryContainer, onColor = MaterialTheme.colorScheme.onTertiaryContainer)
+                            DetailChip(text = stringResource(R.string.modules_catalog_sort_official), color = MaterialTheme.colorScheme.tertiaryContainer, onColor = MaterialTheme.colorScheme.onTertiaryContainer)
                         }
                         if (installed) {
-                            DetailChip(text = "Installed", color = MaterialTheme.colorScheme.primaryContainer, onColor = MaterialTheme.colorScheme.onPrimaryContainer)
+                            DetailChip(text = stringResource(R.string.modules_catalog_installed), color = MaterialTheme.colorScheme.primaryContainer, onColor = MaterialTheme.colorScheme.onPrimaryContainer)
                         }
                     }
 
@@ -676,7 +676,7 @@ private fun CatalogModuleCard(
                 module.version?.let { DetailChip(text = it, color = MaterialTheme.colorScheme.secondaryContainer, onColor = MaterialTheme.colorScheme.onSecondaryContainer) }
                 DetailChip(text = "${module.stars}", icon = { Icon(Icons.Rounded.Star, null, Modifier.size(14.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer) }, color = MaterialTheme.colorScheme.secondaryContainer, onColor = MaterialTheme.colorScheme.onSecondaryContainer)
                 if (module.isOfficial) DetailChip(text = stringResource(R.string.modules_catalog_sort_official), color = MaterialTheme.colorScheme.tertiaryContainer, onColor = MaterialTheme.colorScheme.onTertiaryContainer)
-                if (installed) DetailChip(text = "Installed", color = MaterialTheme.colorScheme.primaryContainer, onColor = MaterialTheme.colorScheme.onPrimaryContainer)
+                if (installed) DetailChip(text = stringResource(R.string.modules_catalog_installed), color = MaterialTheme.colorScheme.primaryContainer, onColor = MaterialTheme.colorScheme.onPrimaryContainer)
             }
             module.repoDescription?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis) }
             AnimatedVisibility(visible = installing, enter = fadeIn(), exit = fadeOut()) { LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }

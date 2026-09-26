@@ -401,12 +401,12 @@ fun TvCatalogScreen(
         if (showDangerDialog) {
             AlertDialog(
                 onDismissRequest = { showDangerDialog = false },
-                title = { TvText("Potentially unsafe module") },
+                title = { TvText(stringResource(R.string.modules_catalog_danger_title)) },
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        TvText("This module has unusually large content:", style = TvMaterialTheme.typography.bodyMedium)
+                        TvText(stringResource(R.string.modules_catalog_danger_message), style = TvMaterialTheme.typography.bodyMedium)
                         dangerReason?.let { TvText(it, style = TvMaterialTheme.typography.bodySmall, color = TvMaterialTheme.colorScheme.error) }
-                        TvText("Continue anyway?", style = TvMaterialTheme.typography.bodyMedium)
+                        TvText(stringResource(R.string.modules_catalog_danger_confirm), style = TvMaterialTheme.typography.bodyMedium)
                     }
                 },
                 confirmButton = {
@@ -415,7 +415,7 @@ fun TvCatalogScreen(
                         shape = TvClickableSurfaceDefaults.shape(TvMaterialTheme.shapes.small),
                         colors = TvClickableSurfaceDefaults.colors(containerColor = TvMaterialTheme.colorScheme.primaryContainer)
                     ) {
-                        TvText("Continue", modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp))
+                        TvText(stringResource(R.string.modules_catalog_danger_continue), modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp))
                     }
                 },
                 dismissButton = {
@@ -424,7 +424,7 @@ fun TvCatalogScreen(
                         shape = TvClickableSurfaceDefaults.shape(TvMaterialTheme.shapes.small),
                         colors = TvClickableSurfaceDefaults.colors(containerColor = TvMaterialTheme.colorScheme.surfaceVariant)
                     ) {
-                        TvText("Go back", modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp))
+                        TvText(stringResource(R.string.modules_catalog_danger_go_back), modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp))
                     }
                 },
                 containerColor = TvMaterialTheme.colorScheme.surfaceVariant,

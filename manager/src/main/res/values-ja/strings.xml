@@ -1,0 +1,348 @@
+<resources>
+    <!-- To translators: you can leave your here -->
+    <string name="translation_contributors" />
+
+    <!-- Home - Status -->
+    <string name="home_status_service_is_running">%1$s は実行中です</string>
+    <string name="home_status_service_not_running">%1$s は実行されていません</string>
+    <string name="home_status_service_version">バージョン %2$s、%1$s</string>
+    <string name="home_status_service_version_update"><![CDATA[バージョン %2$s、%1$s<br>再度起動するとバージョン %3$s に更新されます]]></string>
+
+    <!-- Home - Adb -->
+    <string name="home_adb_title"><![CDATA[パソコンに接続して起動]]></string>
+    <string name="home_adb_description"><![CDATA[root 化されていないデバイスでは、adb を使用して Nightzuku を起動する必要があります（パソコンへの接続が必要）。この操作はデバイスを再起動するたびに行う必要があります。<b><a href=\"%1$s\">ヘルプをお読みください</a></b>。]]>
+
+注意: Nightzuku は Shizuku の後継アプリです。競合を防ぐため、旧公式 Shizuku アプリを先にアンインストールしてください。</string>
+    <string name="home_adb_button_view_help">ヘルプを読む</string>
+    <string name="home_adb_button_view_command">コマンドを表示</string>
+    <string name="home_adb_dialog_view_command_message"><![CDATA[<font face="monospace">%1$s</font><br><br>※ その他にも注意事項があります。先にヘルプを読んだことを確認してください。]]></string>
+    <string name="home_adb_dialog_view_command_copy_button">コピー</string>
+    <string name="home_adb_dialog_view_command_button_send">送信</string>
+
+    <!-- Home - Wireless Adb -->
+    <string name="home_wireless_adb_title"><![CDATA[ワイヤレスデバッグで起動]]></string>
+    <string name="home_wireless_adb_description"><![CDATA[Android 11 以降では、ワイヤレスデバッグを有効にすることで、パソコンに接続せずにデバイス上から直接 Nightzuku を起動できます。<p>まずステップガイドをご確認ください。]]>
+
+注意: Nightzuku は Shizuku の後継アプリです。競合を防ぐため、旧公式 Shizuku アプリを先にアンインストールしてください。</string>
+    <string name="home_wireless_adb_description_pre_11"><![CDATA[Android 11 より前のバージョンでは、ワイヤレスデバッグを有効にするためにパソコンへの接続が必要です。]]></string>
+    <string name="home_wireless_adb_view_guide_button">ステップガイド</string>
+    <string name="home_local_network_title">ローカルネットワークへのアクセス</string>
+    <string name="home_local_network_description">この Android バージョンでは、ワイヤレスデバッグに %1$s が必要です。</string>
+    <string name="home_local_network_granted">%1$s は許可されています。</string>
+    <string name="home_local_network_missing">%1$s が許可されていません。</string>
+    <string name="home_local_network_grant">アクセスを許可</string>
+    <string name="home_local_network_permission_denied">ワイヤレスデバッグにはローカルネットワークへのアクセスが必要です。</string>
+
+    <!-- Adb -->
+    <string name="dialog_adb_discovery">ワイヤレスデバッグサービスを検索中</string>
+    <string name="dialog_adb_discovery_message">「開発者向けオプション」で「ワイヤレスデバッグ」を有効にしてください。「ワイヤレスデバッグ」はネットワークが変わると自動的に無効になります。\n\n注意:「開発者向けオプション」や「USB デバッグ」を無効にすると、Nightzuku は停止します。</string>
+    <string name="dialog_adb_discovery_message_toggle_wireless_debugging">検索が終わらない場合は、「ワイヤレスデバッグ」を一度無効にしてから再度有効にしてみてください。</string>
+    <string name="dialog_adb_port">ポート</string>
+    <string name="dialog_adb_invalid_port">ポートは 1〜65535 の整数で指定してください。</string>
+    <string name="adb_pairing">ペア設定</string>
+    <string name="dialog_adb_pairing_title">デバイスとペア設定</string>
+    <string name="dialog_adb_pairing_discovery">ペア設定サービスを検索中</string>
+    <string name="dialog_adb_pairing_paring_code">ペア設定コード</string>
+    <string name="paring_code_is_wrong">ペア設定コードが間違っています。</string>
+    <string name="cannot_connect_port">ワイヤレスデバッグサービスに接続できません。</string>
+    <string name="dialog_wireless_adb_not_enabled">ワイヤレスデバッグが有効になっていません。\n注意: Android 11 より前のバージョンでは、ワイヤレスデバッグを有効にするためにパソコンへの接続が必須です。</string>
+    <string name="dialog_adb_pairing_message">次の手順でペア設定を開始してください:「開発者向けオプション」→「ワイヤレスデバッグ」→「ペア設定コードによるデバイスのペア設定」。\n\nペア設定が開始されると、ペア設定コードを入力できるようになります。</string>
+    <string name="adb_pairing_requires_multi_window">先に分割画面（マルチウィンドウ）モードにしてください。</string>
+    <string name="adb_pairing_requires_multi_window_reason">システムはペア設定ダイアログを常に表示しておく必要があるため、このアプリとシステムダイアログを同時に表示するには分割画面モードを使うしかありません。</string>
+    <string name="adb_error_key_store">ワイヤレスデバッグ用の鍵を生成できません。\nこのデバイスの KeyStore の仕組みが壊れている可能性があります。</string>
+    <string name="adb_pair_required">先にペア設定を行ってください。</string>
+    <string name="development_settings">開発者向けオプション</string>
+    <string name="notification_settings">通知設定</string>
+    <string name="adb_pairing_tutorial_title">Nightzuku をデバイスとペア設定</string>
+    <string name="adb_pairing_tutorial_content_notification">Nightzuku からの通知を使ってペア設定を完了できます。</string>
+    <string name="adb_pairing_tutorial_content_steps">「開発者向けオプション」→「ワイヤレスデバッグ」を開き、「ペア設定コードによるデバイスのペア設定」をタップすると、6 桁のコードが表示されます。</string>
+    <string name="adb_pairing_tutorial_content_enter_pairing_code">通知にコードを入力してペア設定を完了します。</string>
+    <string name="adb_pairing_tutorial_content_notification_blocked">ペア設定には Nightzuku からの通知を操作する必要があります。Nightzuku の通知を許可してください。</string>
+    <string name="adb_pairing_tutorial_content_miui">MIUI をお使いの場合は、システム設定の「通知」→「通知シェード」で通知スタイルを「Android」に切り替える必要がある場合があります。</string>
+    <string name="adb_pairing_tutorial_content_miui_2">そうしないと、通知からペア設定コードを入力できない場合があります。</string>
+    <string name="adb_pairing_tutorial_content_left_is_clickable">「ワイヤレスデバッグ」項目の左側はタップ可能で、タップすると新しいページが開きます。右側のスイッチをオンにするだけでは不十分です。</string>
+    <string name="adb_pairing_tutorial_content_finish">Nightzuku に戻り、Nightzuku を起動します。</string>
+    <string name="adb_pairing_tutorial_content_network">Nightzuku はローカルネットワークにアクセスする必要があります。これはネットワーク権限によって制御されます。</string>
+    <string name="adb_pairing_tutorial_content_network_limation_not_foreground">一部のシステム（MIUI など）では、アプリが標準に従ってフォアグラウンドサービスを使用していても、画面に表示されていないアプリのネットワークアクセスを禁止します。そのようなシステムでは Nightzuku の電池の最適化を無効にしてください。</string>
+
+    <!-- Home - Root -->
+    <string name="home_root_title"><![CDATA[起動（root 化済みデバイス向け）]]></string>
+    <string name="home_root_description"><![CDATA[また、Nightzuku は起動時に自動で開始することもできます。自動で開始されない場合は、システムやサードパーティ製ツールが Nightzuku を制限していないか確認してください。<br>%s を参照してください。]]>
+
+注意: Nightzuku は Shizuku の後継アプリです。競合を防ぐため、旧公式 Shizuku アプリを先にアンインストールしてください。</string>
+    <string name="home_root_description_sui"><![CDATA[Magisk をお使いの場合は、%1$s を試すことができます。root ユーザー向けには、最終的に Nightzuku を置き換えるものです。なお、既存のアプリが %2$s を使用するには多少の変更が必要です。]]></string>
+    <string name="home_root_button_start">起動</string>
+    <string name="home_root_button_restart">再起動</string>
+
+    <!-- Home - Application management -->
+    <string name="home_app_management_title">アプリの管理</string>
+    <plurals name="home_app_management_authorized_apps_count">
+        <item quantity="other"><![CDATA[%d 個のアプリを許可済み]]></item>
+    </plurals>
+    <string name="home_app_management_view_authorized_apps"><![CDATA[タップして許可済みアプリを管理]]></string>
+    <string name="home_app_management_empty">Nightzuku を要求または宣言したアプリがここに表示されます。</string>
+
+    <!-- Home - Learn more -->
+    <string name="home_learn_more_title">Nightzuku について学ぶ</string>
+    <string name="home_learn_more_description">Nightzuku を使った開発方法を学ぶ</string>
+
+    <!-- Home - Diagnostics -->
+    <string name="home_refresh">更新</string>
+    <string name="home_diagnostics_title">診断</string>
+    <string name="home_diagnostics_copy">診断情報をコピー</string>
+    <string name="home_diagnostics_copied">診断情報をコピーしました。</string>
+    <string name="home_modules_description">ADB ベースのモジュールをインストール・管理</string>
+
+    <!-- Home - Adb permissions limited -->
+    <string name="home_adb_is_limited_title">追加の手順が必要です</string>
+    <string name="home_adb_is_limited_description">デバイスのメーカーが adb の権限を制限しているため、Nightzuku を使用するアプリが正常に動作しません。\n\n通常、この制限は「開発者向けオプション」のいくつかの設定を変更することで解除できます。詳しい方法はヘルプをお読みください。\n\n変更を反映するには Nightzuku の再起動が必要な場合があります。</string>
+
+    <!-- Application management -->
+    <string name="app_management_select_all">すべて選択</string>
+    <string name="app_management_deselect_all">すべて選択解除</string>
+    <string name="app_management_dialog_adb_is_limited_title">adb の権限が制限されています</string>
+    <string name="app_management_dialog_adb_is_limited_message"><![CDATA[デバイスのメーカーが adb の権限を制限している可能性が高いです。<p><b><a href=\"%1$s\">こちらのドキュメント</a></b>にお使いのシステム向けの解決策があるかもしれません。]]></string>
+    <string name="app_management_item_summary_requires_root">※ Nightzuku を root で実行する必要があります</string>
+
+    <!-- Terminal -->
+    <string name="home_terminal_title">ターミナルアプリで Nightzuku を使用</string>
+    <string name="home_terminal_description">お好みのターミナルアプリから Nightzuku 経由でコマンドを実行</string>
+    <string name="terminal_tutorial_1">まず、ファイルを任意の場所にエクスポートします。%1$s と %2$s の 2 つのファイルが作成されます。</string>
+    <string name="terminal_tutorial_1_description">選択したフォルダに同名のファイルがある場合、それらは削除されます。\n\nエクスポート機能は SAF（ストレージアクセスフレームワーク）を使用します。MIUI では SAF の機能が壊れていると報告されています。MIUI をお使いの場合は、Nightzuku の APK からファイルを取り出すか、GitHub からダウンロードする必要があるかもしれません。</string>
+    <string name="terminal_export_files">ファイルをエクスポート</string>
+    <string name="terminal_tutorial_2">次に、任意のテキストエディタで %1$s を開いて編集します。</string>
+    <string name="terminal_tutorial_2_description">例えば、%1$s で Nightzuku を使いたい場合は、%2$s を %3$s に置き換えます（%4$s は %1$s のパッケージ名です）。</string>
+    <string name="terminal_tutorial_3">最後に、ターミナルアプリがアクセスできる場所にファイルを移動すると、%1$s を使って Nightzuku 経由でコマンドを実行できるようになります。</string>
+    <string name="terminal_tutorial_3_description">ヒント: %1$s に実行権限を付与して %2$s に追加すると、%1$s を直接使用できるようになります。</string>
+    <string name="rish_description"><![CDATA[
+%1$s を使うと、任意のターミナルアプリから Nightzuku が実行するシェルに接続して操作できます。
+<p>%1$s の詳しい使い方については、タップしてドキュメントをご覧ください。
+    ]]></string>
+
+    <!-- Settings -->
+    <string name="settings_title">設定</string>
+    <string name="settings_language">言語</string>
+    <string name="settings_user_interface">外観</string>
+    <string name="settings_black_night_theme">ブラックナイトテーマ</string>
+    <string name="settings_black_night_theme_summary">ダークモードが有効な場合、真っ黒なテーマを使用します</string>
+    <string name="settings_startup">起動</string>
+    <string name="settings_translation_contributors">翻訳協力者</string>
+    <string name="settings_translation">翻訳に参加</string>
+    <string name="settings_translation_summary">%s をあなたの言語に翻訳するのを手伝ってください</string>
+    <string name="settings_start_on_boot">起動時に開始（root）</string>
+    <string name="settings_start_on_boot_summary">root 化済みデバイスでは、Nightzuku を起動時に自動で開始できます</string>
+    <string name="settings_use_system_color">システムのテーマカラーを使用</string>
+
+    <!-- ADB modules -->
+    <string name="modules_title">ADB モジュール</string>
+    <string name="modules_settings_title">モジュール</string>
+    <string name="modules_settings_summary">ZIP モジュールをインストールし、動作中の Nightzuku ADB/root サーバーを通じてアクションを実行します</string>
+    <string name="modules_header_summary">%1$d 個インストール済み、%2$d 個有効</string>
+    <string name="modules_version_label">バージョン: %s</string>
+    <string name="modules_author_label">作者: %s</string>
+    <string name="modules_access_mode">モジュールのアクセスモード</string>
+    <string name="modules_access_mode_safe">セーフ</string>
+    <string name="modules_access_mode_safe_summary">シェルブリッジ、WebUI ダウンロード、アクション、サービスはすべて無効です。</string>
+    <string name="modules_access_mode_custom">カスタム</string>
+    <string name="modules_access_mode_custom_summary">アクション、サービス、WebUI ブリッジ、ネットワーク、ダウンロードの権限を手動で選択します。</string>
+    <string name="modules_access_mode_full">フルアクセス</string>
+    <string name="modules_access_mode_full_summary">シェルブリッジ、アクション、サービス、WebUI ダウンロードを許可します。WebView のインターネットアクセスはブロックされたままです。</string>
+    <string name="modules_custom_permissions">カスタム権限</string>
+    <string name="modules_custom_permissions_summary">モジュールの各権限を個別に設定します</string>
+    <string name="modules_permission_action">アクションの実行</string>
+    <string name="modules_permission_action_summary">action.sh の手動実行を許可します。</string>
+    <string name="modules_permission_service">サービスの実行</string>
+    <string name="modules_permission_service_summary">バックグラウンドアクションも有効な場合に service.sh を許可します。</string>
+    <string name="modules_permission_web_bridge">WebUI シェルブリッジ</string>
+    <string name="modules_permission_web_bridge_summary">ローカルの WebUI に対してのみ、かつ WebView のインターネットアクセスがオフの場合にのみ window.Nightzuku を公開します。</string>
+    <string name="modules_permission_web_network">WebView のインターネットアクセス</string>
+    <string name="modules_permission_web_network_summary">HTTPS のページ遷移とアセットの読み込みを許可します。その WebView ではシェルブリッジが公開されなくなります。</string>
+    <string name="modules_permission_web_download">WebUI の download()</string>
+    <string name="modules_permission_web_download_summary">WebUI フォルダへの HTTPS ファイルダウンロードを許可します（index.html を除く）。</string>
+    <string name="modules_background_actions">バックグラウンドアクションを許可</string>
+    <string name="modules_background_actions_summary">フルアクセスモードで、インストール済みモジュールがバックグラウンドで ADB 処理を要求することを許可します</string>
+    <string name="modules_background_allowed">バックグラウンド許可</string>
+    <string name="modules_background_blocked">バックグラウンド禁止</string>
+    <string name="modules_install_zip">ZIP をインストール</string>
+    <string name="modules_empty_title">モジュールがインストールされていません</string>
+    <string name="modules_empty_summary">ADB モジュールは、module.prop と、任意のバナー、WebUI、action.sh、service.sh を含む KernelSU/Magisk 形式の ZIP を使用します。</string>
+    <string name="modules_install_success">%s をインストールしました</string>
+    <string name="modules_install_failed">インストールに失敗しました: %s</string>
+    <string name="modules_enabled">有効</string>
+    <string name="modules_disabled">無効</string>
+    <string name="modules_enable">有効にする</string>
+    <string name="modules_disable">無効にする</string>
+    <string name="modules_full_trust">完全信頼</string>
+    <string name="modules_trust">信頼する</string>
+    <string name="modules_untrust">信頼を解除</string>
+    <string name="modules_run_action">アクション</string>
+    <string name="modules_run_service">サービス</string>
+    <string name="modules_running">モジュールスクリプトを実行中…</string>
+    <string name="modules_open_webui">WebUI</string>
+    <string name="modules_webui">モジュール WebUI</string>
+    <string name="modules_delete">削除</string>
+    <string name="modules_delete_title">モジュールを削除しますか？</string>
+    <string name="modules_delete_message">%s を Nightzuku のモジュールストレージから削除します。</string>
+    <string name="modules_action_result">アクション完了: 終了コード %d</string>
+    <string name="modules_action_failed">アクションに失敗しました</string>
+    <string name="modules_service_result">サービス完了: 終了コード %d</string>
+    <string name="modules_service_failed">サービスに失敗しました</string>
+    <string name="modules_recommand_title">ReCommand</string>
+    <string name="modules_recommand_source">%1$s / %2$s</string>
+    <string name="modules_recommand_expand">展開</string>
+    <string name="modules_recommand_collapse">折りたたむ</string>
+    <string name="modules_recommand_copy">コピー</string>
+    <string name="modules_recommand_execute">実行</string>
+    <string name="modules_recommand_close">閉じる</string>
+    <string name="modules_recommand_command_clip_label">モジュールコマンド</string>
+    <string name="modules_recommand_webui">WebUI の ReCommand</string>
+    <string name="modules_recommand_webui_summary">WebUI からシェルを実行する前に確認ダイアログを表示します。</string>
+    <string name="modules_recommand_action">アクションの ReCommand</string>
+    <string name="modules_recommand_action_summary">action.sh を実行する前に確認ダイアログを表示します。</string>
+
+    <!-- About -->
+    <string name="action_about">このアプリについて</string>
+    <string name="about_source_code_button">ソースコード</string>
+    <string name="about_view_source_code"><![CDATA[%s でソースコードを見る]]></string>
+
+    <!-- Stop -->
+    <string name="action_stop">Nightzuku を停止</string>
+    <string name="dialog_stop_message">Nightzuku サービスを停止します。</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_service_status">サービスの起動状態</string>
+    <string name="notification_service_starting">Nightzuku サービスを起動中…</string>
+    <string name="notification_service_start_failed">Nightzuku サービスの起動に失敗しました。</string>
+    <string name="notification_service_start_no_root">root 権限の要求に失敗しました。</string>
+    <string name="notification_working">処理中…</string>
+    <string name="notification_channel_adb_pairing">ワイヤレスデバッグのペア設定</string>
+    <string name="notification_adb_pairing_input_paring_code">ペア設定コードを入力</string>
+    <string name="notification_adb_pairing_searching_for_service_title">ペア設定サービスを検索中</string>
+    <string name="notification_adb_pairing_service_found_title">ペア設定サービスが見つかりました</string>
+    <string name="notification_adb_pairing_stop_searching">検索を停止</string>
+    <string name="notification_adb_pairing_working_title">ペア設定中</string>
+    <string name="notification_adb_pairing_succeed_title">ペア設定に成功しました</string>
+    <string name="notification_adb_pairing_succeed_text">Nightzuku サービスを起動できるようになりました。</string>
+    <string name="notification_adb_pairing_failed_title">ペア設定に失敗しました</string>
+    <string name="notification_adb_pairing_retry">再試行</string>
+
+    <!-- Permission related, appears in system permission UI -->
+    <string name="permission_label">Nightzuku へのアクセス</string>
+    <string name="permission_description">アプリに Nightzuku の使用を許可します。</string>
+    <string name="permission_warning_template"><![CDATA[<b>%1$s</b> に %2$s を許可しますか？]]></string>
+    <string name="grant_dialog_button_allow_always">常に許可</string>
+    <string name="grant_dialog_button_deny">"許可しない"</string>
+
+    <!-- Starter -->
+    <string name="starter">スターター</string>
+    <string name="start_with_root_failed">root 権限が許可されていないか、このデバイスが root 化されていないため、サービスを起動できません。</string>
+
+    <!-- Misc -->
+    <string name="dialog_cannot_open_browser_title">ブラウザを起動できません</string>
+    <string name="toast_copied_to_clipboard">%s\nをクリップボードにコピーしました。</string>
+    <string name="toast_copied_to_clipboard_with_text"><![CDATA[<b>%s</b> をクリップボードにコピーしました。]]></string>
+
+    <!-- Messages for legacy -->
+    <string name="dialog_legacy_not_support_title">%1$s はモダン Nightzuku に対応していません</string>
+    <string name="dialog_legacy_not_support_message"><![CDATA[レガシー Nightzuku は 2019 年 3 月に非推奨になりました。また、レガシー Nightzuku は新しい Android システムでは動作しません。<p><b>%1$s</b> の開発者にアップデートを依頼してください。]]></string>
+    <string name="dialog_requesting_legacy_title">%1$s がレガシー Nightzuku を要求しています</string>
+    <string name="dialog_requesting_legacy_message"><![CDATA[<b>%1$s</b> はモダン Nightzuku に対応していますが、レガシー Nightzuku を要求しています。Nightzuku が実行されていない可能性があります。Nightzuku アプリで確認してください。<p>レガシー Nightzuku は 2019 年 3 月に非推奨になりました。]]></string>
+    <string name="dialog_requesting_legacy_button_open_shizuku">Nightzuku を開く</string>
+
+    <!-- Lab Features -->
+    <string name="lab_features_title">試験運用機能</string>
+    <string name="lab_features_summary">実験的な機能</string>
+    <string name="shizuku_connectors_title">Nightzuku コネクタ</string>
+    <string name="shizuku_connectors_summary">プラグインによる Nightzuku の起動を許可します</string>
+    <string name="tapi_title">TAPI</string>
+    <string name="tapi_summary">Termux API とコマンドライン実行ブリッジを有効にします</string>
+    <string name="tapi_warning_title">TAPI を有効にしますか？</string>
+    <string name="tapi_warning_message">TAPI を使うと、許可されたクライアントが Shizuku の権限を管理したりコマンドを実行したりできるようになります。信頼できるクライアントの場合にのみ有効にしてください。</string>
+    <string name="nightdog_title">NightDog ベータ版</string>
+    <string name="nightdog_summary">消費電力ゼロの軽量システムモニター</string>
+    <string name="nightdog_description">NightDog は inotify（ポーリングなし）を使ってサーバーの状態を監視します。シェルプロセスとして動作します。</string>
+    <string name="unsafe_warning_title">警告</string>
+    <string name="unsafe_warning_message">この機能を有効にするのは安全ではありません。本当によろしいですか？</string>
+
+    <!-- Update Settings -->
+    <string name="update_settings_title">アップデート設定</string>
+    <string name="update_settings_catalog">モジュールカタログ</string>
+    <string name="update_settings_catalog_enabled">カタログを有効にする</string>
+    <string name="update_settings_catalog_enabled_summary">GitHub Topics から見つかったモジュールを表示します</string>
+    <string name="update_settings_frequency">更新頻度</string>
+    <string name="update_settings_frequency_label">アップデートを確認</string>
+    <string name="update_settings_frequency_manual">手動</string>
+    <string name="update_settings_frequency_daily">毎日</string>
+    <string name="update_settings_frequency_weekly">毎週</string>
+    <string name="update_settings_install_mode">インストール方法</string>
+    <string name="update_settings_install_mode_label">既定のインストール方法</string>
+    <string name="update_settings_install_mode_sources">ソースからビルド</string>
+    <string name="update_settings_install_mode_release">リリース ZIP をダウンロード</string>
+    <string name="update_settings_github">GitHub</string>
+    <string name="update_settings_github_pat">パーソナルアクセストークン</string>
+    <string name="update_settings_github_pat_set">トークン設定済み</string>
+    <string name="update_settings_github_pat_unset">未設定（60 リクエスト/時）</string>
+    <string name="update_settings_github_pat_title">GitHub パーソナルアクセストークン</string>
+    <string name="update_settings_github_pat_description">任意。GitHub PAT を設定すると、API のレート制限が 60 から 5000 リクエスト/時に増えます。公開リポジトリの場合は public_repo スコープのみで十分です。</string>
+    <string name="update_settings_github_pat_label">トークン</string>
+    <string name="update_settings_github_pat_show">表示</string>
+    <string name="update_settings_github_pat_hide">非表示</string>
+    <string name="update_settings_github_pat_clear">クリア</string>
+    <string name="update_settings_github_pat_delete">トークンを削除</string>
+    <string name="update_settings_github_pat_delete_summary">保存されている GitHub トークンを削除します</string>
+
+    <!-- Module Catalog -->
+    <string name="modules_catalog">カタログ</string>
+    <string name="modules_catalog_title">モジュールカタログ</string>
+    <string name="modules_catalog_empty">モジュールが見つかりません</string>
+    <string name="modules_catalog_sort_newest">新しい順</string>
+    <string name="modules_catalog_sort_oldest">古い順</string>
+    <string name="modules_catalog_sort_stars">スター数</string>
+    <string name="modules_catalog_sort_official">公式</string>
+    <string name="modules_catalog_install_sources">ソースからインストール</string>
+    <string name="modules_catalog_install_release">リリース ZIP をダウンロード</string>
+    <string name="modules_catalog_install_description">このモジュールのインストール方法を選択してください:</string>
+    <string name="modules_catalog_install_success">モジュールをインストールしました</string>
+    <string name="modules_catalog_install_failed">インストールに失敗しました: %s</string>
+    <string name="modules_catalog_token_required">GitHub トークンが必要です</string>
+    <string name="modules_catalog_token_hint">GitHub パーソナルアクセストークン</string>
+    <string name="modules_catalog_token_description">GitHub でモジュールを検索するにはトークンが必要です。github.com/settings/tokens で作成できます</string>
+    <string name="modules_catalog_token_format_warning">トークンは ghp_ または github_pat_ で始まり、30 文字以上である必要があります</string>
+    <string name="modules_catalog_loading">カタログを読み込み中…</string>
+    <string name="modules_catalog_error">カタログの読み込みに失敗しました</string>
+    <string name="modules_catalog_install">インストール</string>
+    <string name="modules_catalog_installing">インストール中…</string>
+    <string name="modules_catalog_view_github">GitHub で見る</string>
+    <string name="modules_catalog_skip_token">スキップ</string>
+    <string name="modules_catalog_open">カタログを開く</string>
+    <string name="modules_catalog_installed">インストール済み</string>
+    <string name="modules_catalog_update">アップデート</string>
+    <string name="modules_catalog_back">戻る</string>
+    <string name="modules_catalog_danger_title">安全でない可能性のあるモジュール</string>
+    <string name="modules_catalog_danger_message">このモジュールには、問題を引き起こす可能性のある異常に大きなコンテンツが含まれています:</string>
+    <string name="modules_catalog_danger_confirm">それでも続行しますか？</string>
+    <string name="modules_catalog_danger_continue">続行</string>
+    <string name="modules_catalog_danger_go_back">戻る</string>
+    <string name="modules_webview_error_title">WebView エラー</string>
+    <string name="modules_webview_error_wear">この WearOS デバイスでは WebView がサポートされていないか、初期化中にクラッシュしました。\n\n%1$s</string>
+    <string name="dialog_adb_discovered_port">検出されたポート: %1$d</string>
+
+    <!-- TV Status -->
+    <string name="tv_status_active">有効</string>
+    <string name="tv_status_disabled">無効</string>
+    <string name="tv_status_trusted">信頼済み</string>
+
+    <!-- Wear Catalog -->
+    <string name="wear_catalog_sort_newest">新しい順</string>
+    <string name="wear_catalog_sort_stars">スター数</string>
+    <string name="wear_catalog_sort_official">公式</string>
+    <string name="wear_catalog_sort_by">並べ替え</string>
+    <string name="wear_catalog_filter">フィルター</string>
+
+    <!-- Overrides for rikka core library strings (library lacks Japanese) -->
+    <string name="follow_system">システムに従う</string>
+    <string name="dark_theme_on">常にオン</string>
+    <string name="dark_theme_off">常にオフ</string>
+    <string name="dark_theme_auto_time">夜間</string>
+    <string name="dark_theme_auto_battery">「バッテリーセーバー」が有効なとき</string>
+</resources>
