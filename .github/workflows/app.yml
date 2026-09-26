@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -22,7 +24,7 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
       - name: Write key
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        if: github.event_name != 'pull_request'
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -64,6 +66,12 @@ jobs:
           echo 'org.gradle.parallel=true' >> gradle.properties
           ./gradlew :manager:assemble
           releaseName=`basename out/apk/nightzuku-v*-release.apk .apk` && echo "releaseName=$releaseName" >> $GITHUB_OUTPUT
+      - name: Verify signature
+        run: |
+          for apk in out/apk/*.apk; do
+            echo "== $apk"
+            $ANDROID_HOME/build-tools/37.0.0/apksigner verify --print-certs "$apk" | grep -E "DN|SHA-256"
+          done
       - name: Upload release
         if: success()
         uses: actions/upload-artifact@v4
