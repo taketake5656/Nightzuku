@@ -30,6 +30,7 @@ import androidx.tv.material3.Text as TvText
 import moe.shizuku.manager.R
 import moe.shizuku.manager.module.ModuleSettings
 import moe.shizuku.manager.ui.compose.ShizukuIcon
+import moe.shizuku.manager.utils.NightDogApis
 import rikka.shizuku.Shizuku
 
 @Composable
@@ -39,7 +40,7 @@ fun TvLabMenuScreen(
     val context = LocalContext.current
     var connectorEnabled by remember { mutableStateOf(ModuleSettings.isConnectorEnabled()) }
     var tapiEnabled by remember { mutableStateOf(ModuleSettings.isTapiEnabled()) }
-    var nightDogEnabled by remember { mutableStateOf(try { Shizuku.getNightDogEnabled() } catch (_: Throwable) { false }) }
+    var nightDogEnabled by remember { mutableStateOf(try { NightDogApis.isEnabled() } catch (_: Throwable) { false }) }
     var showUnsafeDialog by remember { mutableStateOf(false) }
     var showTapiWarningDialog by remember { mutableStateOf(false) }
     var showNightDogDialog by remember { mutableStateOf(false) }
@@ -85,7 +86,7 @@ fun TvLabMenuScreen(
                     checked = nightDogEnabled,
                     onToggle = {
                         if (!nightDogEnabled) showNightDogDialog = true
-                        else { Shizuku.setNightDogEnabled(false); nightDogEnabled = false }
+                        else { NightDogApis.setEnabled(false); nightDogEnabled = false }
                     }
                 )
             }
@@ -217,7 +218,7 @@ fun TvLabMenuScreen(
                     onClick = {
                         showNightDogDialog = false
                         nightDogEnabled = true
-                        Shizuku.setNightDogEnabled(true)
+                        NightDogApis.setEnabled(true)
                     },
                     shape = TvClickableSurfaceDefaults.shape(TvMaterialTheme.shapes.small),
                     colors = TvClickableSurfaceDefaults.colors(

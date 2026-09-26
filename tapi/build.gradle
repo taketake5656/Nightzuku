@@ -1,0 +1,10 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    namespace 'moe.shizuku.tapi'
+    buildFeatures {
+        buildConfig false
+    }
+}

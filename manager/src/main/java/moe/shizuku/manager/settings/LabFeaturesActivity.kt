@@ -36,6 +36,7 @@ import moe.shizuku.manager.ui.compose.SettingsGroup
 import moe.shizuku.manager.ui.compose.ShizukuExpressiveTheme
 import moe.shizuku.manager.ui.compose.ShizukuLazyScaffold
 import moe.shizuku.manager.ui.compose.SwitchSettingsRow
+import moe.shizuku.manager.utils.NightDogApis
 import rikka.shizuku.Shizuku
 
 class LabFeaturesActivity : AppActivity() {
@@ -45,7 +46,7 @@ class LabFeaturesActivity : AppActivity() {
         setContent {
             var connectorEnabled by remember { mutableStateOf(ModuleSettings.isConnectorEnabled()) }
             var tapiEnabled by remember { mutableStateOf(ModuleSettings.isTapiEnabled()) }
-            var nightDogEnabled by remember { mutableStateOf(try { Shizuku.getNightDogEnabled() } catch (_: Throwable) { false }) }
+            var nightDogEnabled by remember { mutableStateOf(try { NightDogApis.isEnabled() } catch (_: Throwable) { false }) }
             var showUnsafeDialog by remember { mutableStateOf(false) }
             var showTapiWarningDialog by remember { mutableStateOf(false) }
             var showNightDogDialog by remember { mutableStateOf(false) }
@@ -127,7 +128,7 @@ class LabFeaturesActivity : AppActivity() {
                                         if (enabled) {
                                             showNightDogDialog = true
                                         } else {
-                                            Shizuku.setNightDogEnabled(false)
+                                            NightDogApis.setEnabled(false)
                                             nightDogEnabled = false
                                         }
                                     },
@@ -208,7 +209,7 @@ class LabFeaturesActivity : AppActivity() {
                                 WearButton(onClick = {
                                     showNightDogDialog = false
                                     nightDogEnabled = true
-                                    Shizuku.setNightDogEnabled(true)
+                                    NightDogApis.setEnabled(true)
                                 }) {
                                     WearText(stringResource(android.R.string.ok))
                                 }
@@ -270,7 +271,7 @@ class LabFeaturesActivity : AppActivity() {
                                         if (enabled) {
                                             showNightDogDialog = true
                                         } else {
-                                            Shizuku.setNightDogEnabled(false)
+                                            NightDogApis.setEnabled(false)
                                             nightDogEnabled = false
                                         }
                                     }
@@ -335,7 +336,7 @@ class LabFeaturesActivity : AppActivity() {
                                 TextButton(onClick = {
                                     showNightDogDialog = false
                                     nightDogEnabled = true
-                                    Shizuku.setNightDogEnabled(true)
+                                    NightDogApis.setEnabled(true)
                                 }) {
                                     Text(stringResource(android.R.string.ok))
                                 }
