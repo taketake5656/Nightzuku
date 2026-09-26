@@ -1,135 +1,141 @@
 # Nightzuku
 
-**Nightzuku** is a customized modern fork of **Shizuku**, maintained by kerneldroid. It provides a robust, high-performance interface for applications to use system APIs directly with elevated permissions (root/ADB).
+**日本語** | [English](README.en.md)
 
-This project tracks the latest Android platform developments, including Android 16/17 target stability, introduces a revamped Modern Material 3 Expressive UI using Jetpack Compose, and includes a full ADB-backed ZIP modules runner.
+**Nightzuku** は、kerneldroid がメンテナンスしている **Shizuku** のカスタマイズ版モダンフォークです。アプリが昇格した権限（root / ADB）でシステム API を直接利用するための、堅牢で高性能なインターフェースを提供します。
+
+このプロジェクトは、Android 16/17 をターゲットとした安定性の確保など最新の Android プラットフォームの動向に追従しており、Jetpack Compose による刷新された Material 3 Expressive UI と、ADB ベースの ZIP モジュール実行機能を備えています。
+
+> [!NOTE]
+> このリポジトリ（[taketake5656/Nightzuku](https://github.com/taketake5656/Nightzuku)）は [kerneldroid/Nightzuku](https://github.com/kerneldroid/Nightzuku) のフォークで、アプリの日本語化を行っています。
 
 > [!IMPORTANT]
-> **Migration Action Required:** Due to the package identity upgrade (`moe.shizuku.privileged.api` -> `kerneldroid.nightzuku`), you **MUST UNINSTALL** any older official Shizuku Manager app from your device before installing Nightzuku. Otherwise, they will conflict.
-Upstream project reference: <https://github.com/RikkaApps/Shizuku>
+> **移行時の対応が必要です:** パッケージ ID の変更（`moe.shizuku.privileged.api` → `kerneldroid.nightzuku`）に伴い、Nightzuku をインストールする前に、旧公式 Shizuku Manager アプリを端末から**必ずアンインストール**してください。アンインストールしないと競合が発生します。
 
-## Fork additions
+アップストリームプロジェクト: <https://github.com/RikkaApps/Shizuku>
 
-- Jetpack Compose manager UI with Material 3 Expressive components, motion, switches, and rounded icon treatment.
-- Android 16/17 target work with current preview SDK/build tooling in this fork.
-- ADB Modules screen for installing and managing ZIP modules.
-- Module features: `module.prop`, banner, enable/disable switch, `action.sh`, policy-gated `service.sh`, local WebUI, delete, path checks, size limits, output limits, and last-run logs.
-- Module policy settings: Safe mode, Full access, and background action control.
-- Debug test module under `test-modules/adb-test-module.zip`.
+## フォークでの追加機能
 
-## Documentation
+- Material 3 Expressive コンポーネント、モーション、スイッチ、角丸アイコンを採用した Jetpack Compose 製の管理 UI。
+- このフォークにおける、最新のプレビュー SDK／ビルドツールを使った Android 16/17 ターゲット対応。
+- ZIP モジュールをインストール・管理するための「ADB モジュール」画面。
+- モジュール機能: `module.prop`、バナー、有効／無効スイッチ、`action.sh`、ポリシーで制御される `service.sh`、ローカル WebUI、削除、パスチェック、サイズ制限、出力制限、最終実行ログ。
+- モジュールのポリシー設定: セーフモード、フルアクセス、バックグラウンドアクションの制御。
+- デバッグ用テストモジュール（`test-modules/adb-test-module.zip`）。
 
-- [ADB Modules guide](docs/adb-modules-guide.md)
-- [ADB Modules API reference](docs/adb-modules-api.md)
-- [Nightzuku Connectors API](docs/nightzuku-connectors.md)
-- [Android 17 Compatibility](docs/android-17-compatibility.md)
-- [Wear OS Compatibility](docs/wearos-compatibility.md)
-- [Wear OS Pairing Guide](docs/wearos-pairing.md)
-- [Android TV Support](docs/android-tv-support.md)
-- [NightDog Watchdog](docs/nightdog.md)
+## ドキュメント（英語）
 
-## Background
+- [ADB モジュール ガイド](docs/adb-modules-guide.md)
+- [ADB モジュール API リファレンス](docs/adb-modules-api.md)
+- [Nightzuku コネクタ API](docs/nightzuku-connectors.md)
+- [Android 17 互換性](docs/android-17-compatibility.md)
+- [Wear OS 互換性](docs/wearos-compatibility.md)
+- [Wear OS ペア設定ガイド](docs/wearos-pairing.md)
+- [Android TV サポート](docs/android-tv-support.md)
+- [NightDog ウォッチドッグ](docs/nightdog.md)
 
-When developing apps that require root, the standard approach is running commands in a `su` shell. This is slow, unreliable due to text processing, and limited to available commands. Even with ADB, apps often require root for privileged operations.
+## 背景
 
-Nightzuku provides a high-performance alternative by allowing apps to use system APIs directly with elevated permissions.
+root が必要なアプリを開発する場合、一般的な方法は `su` シェルでコマンドを実行することです。しかしこの方法は遅く、テキスト処理に頼るため信頼性に欠け、利用できるコマンドにも制限されます。ADB を使う場合でも、特権操作には root が必要になることがよくあります。
 
-## How does Nightzuku work?
+Nightzuku は、アプリが昇格した権限でシステム API を直接利用できるようにすることで、高性能な代替手段を提供します。
 
-Android uses `binder` for interprocess communication (IPC) between apps and the system server. The system server checks the UID/PID of the client to enforce permissions.
+## Nightzuku の仕組み
 
-Nightzuku guides users to start a Nightzuku server process with root or ADB. When an authorized app starts, it receives a binder to the Nightzuku server.
+Android では、アプリとシステムサーバー間のプロセス間通信（IPC）に `binder` が使われます。システムサーバーは、クライアントの UID/PID を確認して権限を判定します。
 
-Nightzuku acts as a proxy, receiving requests from the app and forwarding them to the system server. This allows apps to use system APIs with the server's elevated permissions (root or ADB), making it almost identical to using system APIs directly.
+Nightzuku は、ユーザーが root または ADB で Nightzuku サーバープロセスを起動できるよう案内します。許可されたアプリが起動すると、そのアプリは Nightzuku サーバーへの binder を受け取ります。
 
-## Screenshots
+Nightzuku はプロキシとして動作し、アプリからのリクエストを受け取ってシステムサーバーへ転送します。これにより、アプリはサーバーの昇格した権限（root または ADB）でシステム API を利用でき、システム API を直接使うのとほぼ同じ感覚で扱えます。
+
+## スクリーンショット
 
 <details>
-  <summary>📸 Click to open Screenshot Gallery</summary>
+  <summary>📸 クリックしてスクリーンショットを表示</summary>
   <br/>
 
-  ### Phone UI
+  ### スマートフォン UI
   <table>
     <tr>
-      <td align="center"><img src="screenshots/phone/main.png" width="300" /><br/><b>Main Screen</b></td>
-      <td align="center"><img src="screenshots/phone/apps.png" width="300" /><br/><b>Authorized Apps</b></td>
+      <td align="center"><img src="screenshots/phone/main.png" width="300" /><br/><b>メイン画面</b></td>
+      <td align="center"><img src="screenshots/phone/apps.png" width="300" /><br/><b>許可済みアプリ</b></td>
     </tr>
     <tr>
-      <td align="center"><img src="screenshots/phone/modules.png" width="300" /><br/><b>ADB Modules</b></td>
-      <td align="center"><img src="screenshots/phone/module-webui.png" width="300" /><br/><b>Module WebUI</b></td>
+      <td align="center"><img src="screenshots/phone/modules.png" width="300" /><br/><b>ADB モジュール</b></td>
+      <td align="center"><img src="screenshots/phone/module-webui.png" width="300" /><br/><b>モジュール WebUI</b></td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><img src="screenshots/phone/settings.png" width="300" /><br/><b>Settings</b></td>
+      <td colspan="2" align="center"><img src="screenshots/phone/settings.png" width="300" /><br/><b>設定</b></td>
     </tr>
   </table>
 
-  ### Wear OS UI (Native Material 3)
+  ### Wear OS UI（ネイティブ Material 3）
   <table>
     <tr>
-      <td align="center"><img src="screenshots/wearos/wearos_main_scaled.png" width="200" /><br/><b>Main Screen</b></td>
-      <td align="center"><img src="screenshots/wearos/wearos_apps.png" width="200" /><br/><b>Authorized Apps</b></td>
+      <td align="center"><img src="screenshots/wearos/wearos_main_scaled.png" width="200" /><br/><b>メイン画面</b></td>
+      <td align="center"><img src="screenshots/wearos/wearos_apps.png" width="200" /><br/><b>許可済みアプリ</b></td>
     </tr>
     <tr>
-      <td align="center"><img src="screenshots/wearos/wearos_modules_scaled.png" width="200" /><br/><b>ADB Modules</b></td>
-      <td align="center"><img src="screenshots/wearos/wearos_settings_scaled.png" width="200" /><br/><b>Settings</b></td>
+      <td align="center"><img src="screenshots/wearos/wearos_modules_scaled.png" width="200" /><br/><b>ADB モジュール</b></td>
+      <td align="center"><img src="screenshots/wearos/wearos_settings_scaled.png" width="200" /><br/><b>設定</b></td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><img src="screenshots/wearos/wearos_dialog.png" width="200" /><br/><b>Theme Dialog</b></td>
+      <td colspan="2" align="center"><img src="screenshots/wearos/wearos_dialog.png" width="200" /><br/><b>テーマダイアログ</b></td>
     </tr>
   </table>
 
-  ### Android TV UI (Native Material 3)
+  ### Android TV UI（ネイティブ Material 3）
   <table>
     <tr>
-      <td colspan="2" align="center"><img src="screenshots/tv/main.png" width="500" /><br/><b>Main Screen</b></td>
+      <td colspan="2" align="center"><img src="screenshots/tv/main.png" width="500" /><br/><b>メイン画面</b></td>
     </tr>
     <tr>
-      <td align="center"><img src="screenshots/tv/modules.png" width="400" /><br/><b>ADB Modules</b></td>
-      <td align="center"><img src="screenshots/tv/settings.png" width="400" /><br/><b>Settings</b></td>
+      <td align="center"><img src="screenshots/tv/modules.png" width="400" /><br/><b>ADB モジュール</b></td>
+      <td align="center"><img src="screenshots/tv/settings.png" width="400" /><br/><b>設定</b></td>
     </tr>
   </table>
 </details>
 
-## Developer guide
+## 開発者向けガイド
 
-### API & sample
+### API とサンプル
 
-Official API and samples are available at: <https://github.com/RikkaApps/Shizuku-API>
+公式の API とサンプルは次の場所で公開されています: <https://github.com/RikkaApps/Shizuku-API>
 
-### Technical Details
+### 技術的な詳細
 
-1. **ADB Permissions**: ADB permissions vary by system version. Check available permissions in the [Shell AndroidManifest](https://github.com/aosp-mirror/platform_frameworks_base/blob/master/packages/Shell/AndroidManifest.xml). Use `ShizukuService#getUid` or `ShizukuService#checkPermission` to verify server capabilities.
+1. **ADB の権限**: ADB の権限はシステムのバージョンによって異なります。利用可能な権限は [Shell の AndroidManifest](https://github.com/aosp-mirror/platform_frameworks_base/blob/master/packages/Shell/AndroidManifest.xml) で確認してください。サーバーの権限を確認するには `ShizukuService#getUid` または `ShizukuService#checkPermission` を使用します。
 
-2. **Hidden API Restrictions**: From Android 9, hidden API usage is restricted. Use tools like [AndroidHiddenApiBypass](https://github.com/LSPosed/AndroidHiddenApiBypass) if necessary.
+2. **非公開 API の制限**: Android 9 以降、非公開 API（hidden API）の利用は制限されています。必要に応じて [AndroidHiddenApiBypass](https://github.com/LSPosed/AndroidHiddenApiBypass) などのツールを使用してください。
 
-3. **Android 8.0 & ADB**: On API 26, ADB lacks permissions to use `registerUidObserver`. If your app process is not started by an Activity, you may need to start a transparent activity to trigger binder transmission.
+3. **Android 8.0 と ADB**: API 26 では、ADB に `registerUidObserver` を使用する権限がありません。アプリのプロセスが Activity から起動されていない場合、binder の受け渡しを発生させるために透明な Activity を起動する必要があるかもしれません。
 
-4. **Direct `transactRemote` Usage**: Signatures for hidden APIs change between Android versions. While `ShizukuBinderWrapper` handles most cases, direct transaction calls must be carefully verified against the target platform's AIDL definitions.
+4. **`transactRemote` の直接利用**: 非公開 API のシグネチャは Android のバージョンによって変わります。ほとんどのケースは `ShizukuBinderWrapper` で対応できますが、トランザクションを直接呼び出す場合は、対象プラットフォームの AIDL 定義と照らし合わせて慎重に確認する必要があります。
 
-## Developing Nightzuku
+## Nightzuku の開発
 
-### Build
+### ビルド
 
-- Clone with `git clone --recurse-submodules`
-- Build with Gradle: `./gradlew :manager:assembleDebug`
+- `git clone --recurse-submodules` でクローンします
+- Gradle でビルドします: `./gradlew :manager:assembleDebug`
 
-The `:manager:assembleDebug` task generates a debuggable server. Ensure "Always install with package manager" is checked in Android Studio to use the latest server code during debugging.
+`:manager:assembleDebug` タスクはデバッグ可能なサーバーを生成します。デバッグ時に最新のサーバーコードを使うには、Android Studio で「Always install with package manager」にチェックが入っていることを確認してください。
 
-## License
+## ライセンス
 
-All code is licensed under Apache 2.0.
+すべてのコードは Apache 2.0 ライセンスです。
 
-- **Icon Usage**: You may not use `manager/src/main/res/mipmap*/ic_launcher*.png` for anything other than displaying Nightzuku.
-- **Identity**: You may not use `Shizuku` as an app name or use `moe.shizuku.privileged.api` as an application ID in derived works. The current package identity is `kerneldroid.nightzuku`.
-
-
-## Credits 
-
-[**Razgame**](https://github.com/RazGame/Shizuku) for [app list fix](https://github.com/kerneldroid/Nightzuku/commit/6ea7e74984f860398760f5111a15083ea004c842)
+- **アイコンの使用**: `manager/src/main/res/mipmap*/ic_launcher*.png` を Nightzuku の表示以外の目的で使用することはできません。
+- **名称と ID**: 派生物において、`Shizuku` をアプリ名として使用したり、`moe.shizuku.privileged.api` をアプリケーション ID として使用したりすることはできません。現在のパッケージ ID は `kerneldroid.nightzuku` です。
 
 
-## STOP AND READ
-Currently i'm fully rewriting nightzuku. If you want to test new versions, go to [Nightzuku-private](https://github.com/kerneldroid/Nightzuku-private) repo. Nightzuku-private is closed-source. This repo temporarily will not receive updates.
+## クレジット
+
+[**Razgame**](https://github.com/RazGame/Shizuku) — [アプリ一覧の修正](https://github.com/kerneldroid/Nightzuku/commit/6ea7e74984f860398760f5111a15083ea004c842)
 
 
-And new info: my laptop is died. Updates suspended. Write your Issues to nightzuku-private, not this repo (I'll fix they in the future).
+## 必ずお読みください（原作者 kerneldroid より）
+現在、Nightzuku を全面的に書き直しています。新しいバージョンを試したい場合は、[Nightzuku-private](https://github.com/kerneldroid/Nightzuku-private) リポジトリをご覧ください。Nightzuku-private はクローズドソースです。このリポジトリには当面アップデートが行われません。
+
+
+さらにお知らせ: ノートパソコンが壊れてしまいました。アップデートは停止中です。Issue はこのリポジトリではなく nightzuku-private に投稿してください（将来的に対応します）。
