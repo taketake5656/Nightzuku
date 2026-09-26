@@ -94,7 +94,7 @@ class SettingsActivity : AppActivity() {
             val localeOptions = remember(languageTag) {
                 buildLocaleOptions(languageTag)
             }
-            val languageSummary = localeOptions.firstOrNull { it.tag == languageTag }?.summary
+            val languageSummary = localeOptions.firstOrNull { it.tag == languageTag }?.title
                 ?: stringResource(rikka.core.R.string.follow_system)
             val nightValues = resources.getIntArray(R.array.night_mode_value).toList()
             val nightLabels = stringArrayResource(R.array.night_mode).toList()
