@@ -1,16 +1,18 @@
-# Wear OS Setup and Pairing Guide
+# Wear OS のセットアップとペア設定ガイド
 
-This guide describes how to pair and start Nightzuku on Wear OS 5+ devices (such as Galaxy Watch 7).
+**日本語** | [English](wearos-pairing.en.md)
 
-## Instructions
+このガイドでは、Wear OS 5 以降の端末（Galaxy Watch 7 など）で Nightzuku をペア設定して起動する方法を説明します。
 
-1. Enable Developer Options: Go to Settings -> System -> About -> Software Info. Tap Software Version 7 times.
-2. Enable Debugging: In Settings -> Developer Options, enable ADB debugging and Wireless debugging.
-3. Device Pairing: Tap Wireless debugging -> Pair new device. Keep the screen active and the app in the foreground. Open Nightzuku, tap Pairing, and input the port and code.
-4. Start Service: Go back to the main Wireless debugging screen, note the new port, and tap Start in Nightzuku.
+## 手順
 
-## Troubleshooting
+1. 開発者向けオプションを有効にする: 設定 → システム → デバイス情報 → ソフトウェア情報 を開き、ソフトウェアバージョンを 7 回タップします。
+2. デバッグを有効にする: 設定 → 開発者向けオプション で、ADB デバッグとワイヤレスデバッグを有効にします。
+3. デバイスのペア設定: ワイヤレスデバッグ → 新しいデバイスとペア設定 をタップします。画面をオンにしたまま、アプリをフォアグラウンドに表示しておいてください。Nightzuku を開いて「ペア設定」をタップし、ポートとコードを入力します。
+4. サービスを起動する: ワイヤレスデバッグのメイン画面に戻り、新しく表示されたポートを確認して、Nightzuku で「起動」をタップします。
 
-- SSL Handshake Errors: Go to Developer options -> Revoke USB debugging authorizations, reboot the watch, and pair again.
-- Background Freezing: Ensure Nightzuku's battery optimization is set to Unrestricted to prevent the OS from freezing background service initialization.
-- Connection Timed Out: Verify that the watch is connected to the same Wi-Fi network.
+## トラブルシューティング
+
+- SSL ハンドシェイクのエラー: 開発者向けオプション → USB デバッグの承認を取り消す を実行し、ウォッチを再起動してから、もう一度ペア設定を行ってください。
+- バックグラウンドでの停止: OS がバックグラウンドでのサービス初期化を停止しないよう、Nightzuku の電池の最適化を「制限なし」に設定してください。
+- 接続のタイムアウト: ウォッチが同じ Wi-Fi ネットワークに接続されていることを確認してください。

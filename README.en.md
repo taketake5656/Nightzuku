@@ -21,14 +21,15 @@ Upstream project reference: <https://github.com/RikkaApps/Shizuku>
 
 ## Documentation
 
-- [ADB Modules guide](docs/adb-modules-guide.md)
-- [ADB Modules API reference](docs/adb-modules-api.md)
-- [Nightzuku Connectors API](docs/nightzuku-connectors.md)
-- [Android 17 Compatibility](docs/android-17-compatibility.md)
-- [Wear OS Compatibility](docs/wearos-compatibility.md)
-- [Wear OS Pairing Guide](docs/wearos-pairing.md)
-- [Android TV Support](docs/android-tv-support.md)
-- [NightDog Watchdog](docs/nightdog.md)
+- [ADB Modules guide](docs/adb-modules-guide.en.md)
+- [ADB Modules API reference](docs/adb-modules-api.en.md)
+- [Nightzuku Connectors API](docs/nightzuku-connectors.en.md)
+- [Android 17 Compatibility](docs/android-17-compatibility.en.md)
+- [Wear OS Compatibility](docs/wearos-compatibility.en.md)
+- [Wear OS Pairing Guide](docs/wearos-pairing.en.md)
+- [Android TV Support](docs/android-tv-support.en.md)
+- [NightDog Watchdog](docs/nightdog.en.md)
+- [GitHub Catalog](docs/github-catalog.en.md)
 
 ## Background
 

@@ -1,33 +1,35 @@
 # NightDog
 
-NightDog monitors the Shizuku server process for hangs and dead system services, and kills the process when a fault is detected so the starter can restart it.
+**日本語** | [English](nightdog.en.md)
 
-## How it works
+NightDog は、Shizuku サーバープロセスのハングやシステムサービスの停止を監視し、異常を検知した場合はプロセスを終了させて、スターターが再起動できるようにします。
 
-1. The server main thread calls `NightDog.beat()` every 5 seconds.
-2. A watchdog thread checks heartbeat freshness on a 60-second poll interval.
-3. If the heartbeat is overdue by 60 seconds, the watchdog calls `Process.killProcess()`.
-4. The watchdog also holds `linkToDeath` bindings on four system services (`package`, `activity`, `user`, `appops`). If any service dies, NightDog attempts to rebind with exponential backoff (up to 10 attempts).
-5. A fallback `pingBinder()` check runs each poll cycle to catch services that are unresponsive but haven't triggered the death recipient.
+## 仕組み
 
-## Enabling and disabling
+1. サーバーのメインスレッドが 5 秒ごとに `NightDog.beat()` を呼び出します。
+2. ウォッチドッグのスレッドが、60 秒ごとのポーリングでハートビートが途切れていないかを確認します。
+3. ハートビートが 60 秒以上途切れている場合、ウォッチドッグは `Process.killProcess()` を呼び出します。
+4. ウォッチドッグは、4 つのシステムサービス（`package`、`activity`、`user`、`appops`）に `linkToDeath` を登録しています。いずれかのサービスが停止した場合、NightDog は指数バックオフで再接続を試みます（最大 10 回）。
+5. 応答しないものの停止通知が届いていないサービスを検出するため、ポーリングのたびに予備の `pingBinder()` チェックも行います。
 
-NightDog is controlled by a Lab Feature toggle in the manager app. The toggle sends a binder transaction (`setNightDogEnabled` / `getNightDogEnabled`) to the server, which starts or stops the watchdog and heartbeat loop accordingly.
+## 有効化と無効化
 
-## Restart behavior
+NightDog は、マネージャーアプリの試験運用機能のスイッチで切り替えます。スイッチを操作すると、サーバーに binder トランザクション（`setNightDogEnabled`／`getNightDogEnabled`）が送られ、サーバーはそれに応じてウォッチドッグとハートビートのループを開始または停止します。
 
-When the server process is killed, the starter (a separate native process) detects the exit and restarts the server, up to a maximum of 5 attempts.
+## 再起動の動作
 
-## Configuration
+サーバープロセスが終了すると、スターター（独立したネイティブプロセス）が終了を検知し、最大 5 回までサーバーを再起動します。
 
-| Parameter | Default |
+## 設定値
+
+| パラメータ | 既定値 |
 |-----------|---------|
-| Heartbeat interval | 5 s |
-| Timeout (heartbeat overdue) | 60 s |
-| Poll interval | 60 s |
-| Max rebind attempts | 10 |
+| ハートビートの間隔 | 5 秒 |
+| タイムアウト（ハートビートの途切れ） | 60 秒 |
+| ポーリングの間隔 | 60 秒 |
+| 再接続の最大試行回数 | 10 回 |
 
-## Files
+## 関連ファイル
 
 - `nightdog/src/main/java/rikka/shizuku/nightdog/NightDog.kt`
 - `server/src/main/java/rikka/shizuku/server/ShizukuService.java`

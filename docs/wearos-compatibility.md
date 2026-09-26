@@ -1,53 +1,55 @@
-# Wear OS Compatibility (Android 15-17 / Wear OS 5-7)
+# Wear OS 互換性（Android 15〜17 / Wear OS 5〜7）
 
-This document details the Wear OS compatibility enhancements introduced in the Nightzuku modern fork.
+**日本語** | [English](wearos-compatibility.en.md)
 
-## Supported Versions
-* Wear OS 5.1 (Android 15)
-* Wear OS 6 (Android 16)
-* Wear OS 6.1 (Android 16 / API 36.1)
-* Wear OS 7 (Android 17 / API 37) - **Full Support**
+このドキュメントでは、Nightzuku のモダンフォークで導入された Wear OS 互換性の改善について説明します。
 
-## Backward Compatibility
-Nightzuku maintains full backward compatibility with older Wear OS versions (down to API 25).
-* **Dynamic Checks:** We use `Build.VERSION.SDK_INT` and `Android17Compat` to ensure modern system APIs (like multi-device awareness) are used only when available.
-* **Stable UI:** The Compose Material 3 UI degrades gracefully on older devices, ensuring a functional experience even without latest platform features like advanced Monet transitions.
+## 対応バージョン
+* Wear OS 5.1（Android 15）
+* Wear OS 6（Android 16）
+* Wear OS 6.1（Android 16 / API 36.1）
+* Wear OS 7（Android 17 / API 37）- **完全対応**
 
-
-## Changes Implemented
-
-### 1. Watch Form Factor Installation
-We have added the `android.hardware.type.watch` hardware feature flag (marked as `required="false"`) to `AndroidManifest.xml`.
-This ensures that the Android package manager and Google Play correctly identify the APK as installable on Wear OS smartwatch devices.
-
-### 2. Native Wear Compose Material 3 UI
-The entire user interface for Wear OS has been rewritten using the official `androidx.wear.compose:compose-material3` library.
-* **TransformingLazyColumn:** All lists (Authorized Apps, ADB Modules, Settings) use the watch-specific components that automatically adapt to circular displays, scaling and curving elements as they scroll off the edges.
-* **Edge-to-Edge Components:** We use native Wear OS Material 3 buttons, cards, and switches that respect the circular screen geometry.
-* **Dynamic Color (Monet):** Full support for dynamic color schemes (Monet) on Wear OS 4+ devices, automatically matching the user's watch face or system theme.
-* **Optimized Layouts:** The UI natively adapts to small, high-density circular screens with proper paddings and touch targets.
-
-### 3. Native Wear Compose Material 3 Dialogs
-Legacy dialogs have been replaced with native `androidx.wear.compose.material3.AlertDialog`.
-* **Visual Consistency:** Dialogs feature a true black background for visual consistency.
-* **Scroll Support:** Dialog content is scrollable, ensuring accessibility on round displays.
-* **Platform UI:** Uses native Wear OS Material 3 buttons and layouts.
-
-### 4. WebView Fallback for WearOS
-On WearOS devices (especially emulators or specialized builds) that lack a functional WebView provider, Nightzuku now implements a robust fallback.
-* **Crash Prevention:** Activity initialization is wrapped in a `try-catch` block to intercept `UnsupportedOperationException` from the system `WebViewFactory`.
-* **User Feedback:** Instead of crashing or showing a white screen, a native WearOS dialog informs the user that WebUI is unsupported on their hardware.
+## 後方互換性
+Nightzuku は古い Wear OS バージョン（API 25 まで）との完全な後方互換性を維持しています。
+* **動的なチェック:** `Build.VERSION.SDK_INT` と `Android17Compat` を使い、新しいシステム API（複数デバイスの区別など）は利用可能な場合にのみ使用します。
+* **安定した UI:** Compose Material 3 の UI は古い端末でも問題なく縮退して動作するため、高度な Monet の切り替え効果など最新のプラットフォーム機能がなくても、機能的に使える状態が保たれます。
 
 
-## Verification
-* The Nightzuku server successfully binds and operates on Wear OS 7 (API 37) and Wear OS 6.1 (API 36.1) emulators and real devices.
-* Application UI provides a first-class native experience on 1.4-inch and 1.5-inch round displays across all supported versions.
-* All core functionalities, including ADB bindings and root execution, are functional.
+## 実装した変更
 
-## Troubleshooting: Wi-Fi Pairing & Activation
+### 1. ウォッチ端末へのインストール
+`AndroidManifest.xml` に、`android.hardware.type.watch` のハードウェア機能フラグ（`required="false"`）を追加しました。
+これにより、Android のパッケージマネージャーと Google Play が、この APK を Wear OS のスマートウォッチにインストール可能だと正しく判断できます。
 
-If pairing fails or the application does not appear in "Paired devices":
+### 2. ネイティブな Wear Compose Material 3 UI
+Wear OS 向けのユーザーインターフェースは、公式の `androidx.wear.compose:compose-material3` ライブラリで全面的に書き直しました。
+* **TransformingLazyColumn:** すべてのリスト（許可済みアプリ、ADB モジュール、設定）で、円形ディスプレイに自動で適応するウォッチ専用コンポーネントを使用しています。画面の端にスクロールするにつれて、要素が縮小・湾曲します。
+* **Edge-to-Edge コンポーネント:** 円形の画面形状に沿った、Wear OS ネイティブの Material 3 ボタン、カード、スイッチを使用しています。
+* **ダイナミックカラー（Monet）:** Wear OS 4 以降の端末でダイナミックカラー（Monet）に完全対応しており、ユーザーのウォッチフェイスやシステムテーマに自動で色を合わせます。
+* **最適化されたレイアウト:** 小さく高密度な円形画面に合わせて、適切な余白とタップ領域でネイティブに表示されます。
 
-1. **Re-pairing is mandatory after updates**: If you encounter connection/handshake errors (`SSLProtocolException` / `CERTIFICATE_VERIFY_FAILED`), you must pair the app again. Deleting the old keys/paired devices in the Developer options on the watch and starting a clean pairing process is recommended.
-2. **Foreground execution for pairing**: Due to Wear OS standby restrictions, the app must remain in the foreground (or keep the pairing service active) during pairing to prevent the OS from freezing the process.
-3. **Wi-Fi interface connection**: The pairing service connects directly to the dynamic Wi-Fi IP address of the watch discovered via mDNS, rather than `127.0.0.1`. Make sure the watch is connected to Wi-Fi.
+### 3. ネイティブな Wear Compose Material 3 ダイアログ
+従来のダイアログは、ネイティブの `androidx.wear.compose.material3.AlertDialog` に置き換えました。
+* **見た目の一貫性:** ダイアログは真っ黒な背景で、見た目の一貫性を保っています。
+* **スクロール対応:** ダイアログの内容はスクロールできるため、円形のディスプレイでも読みやすくなっています。
+* **プラットフォーム標準の UI:** Wear OS ネイティブの Material 3 ボタンとレイアウトを使用しています。
+
+### 4. WearOS での WebView のフォールバック
+正常に動作する WebView プロバイダがない WearOS 端末（特にエミュレーターや特殊なビルド）向けに、Nightzuku は確実なフォールバックを実装しています。
+* **クラッシュの防止:** Activity の初期化を `try-catch` で囲み、システムの `WebViewFactory` から発生する `UnsupportedOperationException` を捕捉します。
+* **ユーザーへの通知:** クラッシュしたり白い画面を表示したりする代わりに、その端末では WebUI に対応していないことを、WearOS ネイティブのダイアログで知らせます。
+
+
+## 動作確認
+* Nightzuku サーバーは、Wear OS 7（API 37）と Wear OS 6.1（API 36.1）のエミュレーターおよび実機で、正常に接続・動作します。
+* アプリの UI は、対応するすべてのバージョンの 1.4 インチおよび 1.5 インチの円形ディスプレイで、ネイティブな使い心地を提供します。
+* ADB 経由の接続や root での実行を含む、すべての主要な機能が動作します。
+
+## トラブルシューティング: Wi-Fi でのペア設定と起動
+
+ペア設定に失敗する場合や、「ペア設定済みのデバイス」にアプリが表示されない場合:
+
+1. **アップデート後は再度のペア設定が必須です**: 接続やハンドシェイクのエラー（`SSLProtocolException`／`CERTIFICATE_VERIFY_FAILED`）が発生した場合は、アプリをもう一度ペア設定する必要があります。ウォッチの開発者向けオプションで古い鍵やペア設定済みのデバイスを削除してから、ペア設定をやり直すことをおすすめします。
+2. **ペア設定はフォアグラウンドで行ってください**: Wear OS のスタンバイ制限のため、ペア設定中は OS にプロセスを停止されないよう、アプリをフォアグラウンドに表示したままにする（またはペア設定サービスを動作させたままにする）必要があります。
+3. **Wi-Fi 経由の接続**: ペア設定サービスは `127.0.0.1` ではなく、mDNS で検出したウォッチの動的な Wi-Fi IP アドレスに直接接続します。ウォッチが Wi-Fi に接続されていることを確認してください。

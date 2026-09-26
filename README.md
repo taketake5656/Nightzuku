@@ -23,7 +23,7 @@
 - モジュールのポリシー設定: セーフモード、フルアクセス、バックグラウンドアクションの制御。
 - デバッグ用テストモジュール（`test-modules/adb-test-module.zip`）。
 
-## ドキュメント（英語）
+## ドキュメント
 
 - [ADB モジュール ガイド](docs/adb-modules-guide.md)
 - [ADB モジュール API リファレンス](docs/adb-modules-api.md)
@@ -33,6 +33,7 @@
 - [Wear OS ペア設定ガイド](docs/wearos-pairing.md)
 - [Android TV サポート](docs/android-tv-support.md)
 - [NightDog ウォッチドッグ](docs/nightdog.md)
+- [GitHub カタログ](docs/github-catalog.md)
 
 ## 背景
 
@@ -120,6 +121,19 @@ Nightzuku はプロキシとして動作し、アプリからのリクエスト�
 - Gradle でビルドします: `./gradlew :manager:assembleDebug`
 
 `:manager:assembleDebug` タスクはデバッグ可能なサーバーを生成します。デバッグ時に最新のサーバーコードを使うには、Android Studio で「Always install with package manager」にチェックが入っていることを確認してください。
+
+### リリース版のビルド（GitHub Actions）
+
+`.github/workflows/app.yml` で、署名済みのリリース版をビルドできます。署名にはリポジトリの Secrets（`KEYSTORE`、`KEYSTORE_PASSWORD`、`KEYSTORE_ALIAS`、`KEYSTORE_ALIAS_PASSWORD`）を使用します。Secrets が未設定の場合はデバッグ鍵で署名されます。
+
+- **GitHub Release として公開する**: `v` で始まるタグを push します。ビルドした APK が添付されたリリースが自動で作成されます。
+
+  ```sh
+  git tag v13.7.1-ja1
+  git push origin v13.7.1-ja1
+  ```
+
+- **ビルドだけ行う**: GitHub の Actions タブで「App」ワークフローを選び、「Run workflow」から手動で実行します。APK は実行結果の Artifacts からダウンロードできます。
 
 ## ライセンス
 

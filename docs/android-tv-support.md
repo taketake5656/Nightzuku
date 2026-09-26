@@ -1,55 +1,57 @@
-# Android TV Support
+# Android TV サポート
 
-This document details the Android TV compatibility and UI enhancements introduced in Nightzuku.
+**日本語** | [English](android-tv-support.en.md)
 
-## Overview
+このドキュメントでは、Nightzuku で導入された Android TV への対応と UI の改良について説明します。
 
-Nightzuku provides a first-class experience on Android TV devices, featuring a dedicated UI built with **Material 3 Expressive** components tailored for large screens and 10-foot interactions.
+## 概要
 
-## Material 3 Expressive UI for TV
+Nightzuku は Android TV 端末で本格的に使えるよう、大画面と離れた位置からの操作（10 フィート UI）に合わせた **Material 3 Expressive** コンポーネントによる専用 UI を備えています。
 
-The Android TV interface is not a scaled version of the phone UI. It is a native implementation using Jetpack Compose for TV:
-- **Large-screen layout**: Optimized for 16:9 aspect ratios.
-- **Enhanced Typography**: High-legibility fonts and sizes suitable for viewing from a distance.
-- **TV-specific components**: Uses `androidx.tv.material3` components, including TV-optimized buttons, cards, and navigation surfaces.
+## TV 向け Material 3 Expressive UI
 
-## Monet (Dynamic Color) Support
+Android TV のインターフェースは、スマートフォンの UI を拡大したものではありません。Jetpack Compose for TV を使ったネイティブな実装です:
+- **大画面向けレイアウト**: 16:9 のアスペクト比に最適化されています。
+- **読みやすいタイポグラフィ**: 離れた位置からでも読みやすいフォントとサイズを使用しています。
+- **TV 専用コンポーネント**: TV に最適化されたボタン、カード、ナビゲーション面など、`androidx.tv.material3` のコンポーネントを使用しています。
 
-On devices running Android 12 (SDK 31) and higher, Nightzuku supports **Monet (Dynamic Color)**:
-- The UI automatically extracts colors from the user's wallpaper or system theme.
-- This ensures visual consistency with the Android TV system UI and other modern TV applications.
-- Users can toggle Dynamic Color in the Settings menu.
+## Monet（ダイナミックカラー）への対応
 
-## Black Night Theme
+Android 12（SDK 31）以降の端末では、Nightzuku は **Monet（ダイナミックカラー）** に対応しています:
+- UI はユーザーの壁紙やシステムテーマから自動的に色を取得します。
+- これにより、Android TV のシステム UI や他の最新の TV アプリと見た目の一貫性が保たれます。
+- ダイナミックカラーは設定メニューで切り替えられます。
 
-Nightzuku includes a dedicated **Black Night Theme** optimized for OLED and high-contrast viewing:
-- Uses true black (`#000000`) backgrounds.
-- Reduces eye strain in dark environments.
-- Improves contrast for better legibility on various TV panel types.
+## ブラックナイトテーマ
 
-## Focus Management and D-pad Navigation
+Nightzuku には、OLED や高コントラストでの視聴に最適化した専用の**ブラックナイトテーマ**があります:
+- 真っ黒（`#000000`）な背景を使用します。
+- 暗い環境での目の疲れを軽減します。
+- さまざまな種類の TV パネルで、読みやすさのためにコントラストを高めます。
 
-The UI is designed for remote control interaction:
-- **Predictable Focus**: Logical focus movement between elements using the D-pad.
-- **Visual Focus Cues**: Clear, high-contrast focus rings and scale animations on focused items.
-- **Click Handling**: All interactive elements are mapped to the D-pad "Select" or "OK" button.
-- **Back Button**: Standardized back navigation using the remote's back button.
+## フォーカス管理と D-pad 操作
 
-## TV-Optimized Dialogs
+UI はリモコンでの操作を前提に設計されています:
+- **予測しやすいフォーカス**: D-pad で要素間を論理的な順序でフォーカス移動できます。
+- **わかりやすいフォーカス表示**: フォーカス中の項目には、はっきりした高コントラストの枠と拡大アニメーションが表示されます。
+- **決定操作**: 操作できる要素はすべて、D-pad の「決定」または「OK」ボタンに対応しています。
+- **戻るボタン**: リモコンの戻るボタンで、標準的な戻る操作ができます。
 
-Dialogs in **Settings** and **Modules** have been redesigned for TV:
-- **Center-aligned**: Dialogs appear in the center of the screen for better visibility.
-- **Focus Locking**: Focus is trapped within the dialog until it is dismissed.
-- **Scrollable Content**: Long module descriptions or logs are easily scrollable using the D-pad.
-- **Confirmation Actions**: Clear "Confirm" and "Cancel" buttons with distinct focus states.
+## TV に最適化したダイアログ
 
-## Package Identity
+**設定**と**モジュール**のダイアログは TV 向けに作り直されています:
+- **中央配置**: 見やすいよう、ダイアログは画面の中央に表示されます。
+- **フォーカスの固定**: ダイアログを閉じるまで、フォーカスはダイアログ内に留まります。
+- **スクロール可能な内容**: 長いモジュールの説明やログも、D-pad で簡単にスクロールできます。
+- **確認操作**: 「確認」と「キャンセル」のボタンが、区別しやすいフォーカス表示で配置されています。
 
-All TV features respect the Nightzuku package identity:
-- Package Name: `kerneldroid.nightzuku`
-- Shared User ID: `kerneldroid.nightzuku.uid` (if applicable)
+## パッケージ ID
 
-## Verification
+すべての TV 機能は Nightzuku のパッケージ ID に従います:
+- パッケージ名: `kerneldroid.nightzuku`
+- 共有ユーザー ID: `kerneldroid.nightzuku.uid`（該当する場合）
 
-The TV UI has been verified on:
-- Android TV 16 emulator*
+## 動作確認
+
+TV 向け UI は次の環境で確認済みです:
+- Android TV 16 エミュレーター*

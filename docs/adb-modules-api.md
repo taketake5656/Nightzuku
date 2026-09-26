@@ -1,12 +1,14 @@
-# Nightzuku ADB Modules API
+# Nightzuku ADB モジュール API
 
-ADB Modules are ZIP packages installed into Nightzuku private app storage and executed through the currently active Nightzuku server. If Nightzuku is running from ADB, module scripts run with ADB shell privileges. If Nightzuku is running from root, scripts run with root privileges.
+**日本語** | [English](adb-modules-api.en.md)
 
-This is not a root overlay system. It is a Nightzuku-backed module runner for actions, WebUI, service hooks, and controlled ADB/root shell access.
+ADB モジュールは、Nightzuku アプリのプライベートストレージにインストールされ、現在動作中の Nightzuku サーバーを通じて実行される ZIP パッケージです。Nightzuku が ADB で起動されている場合、モジュールのスクリプトは ADB シェルの権限で実行されます。Nightzuku が root で起動されている場合は、root 権限で実行されます。
 
-## Package Format
+これは root のオーバーレイシステムではありません。アクション、WebUI、サービスフック、そして制御された ADB/root シェルアクセスのための、Nightzuku を基盤としたモジュールランナーです。
 
-A module is a `.zip` file with `module.prop` at the ZIP root.
+## パッケージ形式
+
+モジュールは、ZIP のルートに `module.prop` を含む `.zip` ファイルです。
 
 ```text
 module.zip
@@ -18,11 +20,11 @@ module.zip
     └── index.html
 ```
 
-All paths must be relative. Absolute paths and `..` traversal are rejected during install.
+すべてのパスは相対パスである必要があります。絶対パスや `..` によるトラバーサルは、インストール時に拒否されます。
 
 ## module.prop
 
-Required fields:
+必須フィールド:
 
 ```properties
 id=my-module
@@ -33,7 +35,7 @@ author=Author
 description=Short description
 ```
 
-Optional fields:
+任意フィールド:
 
 ```properties
 banner=banner.png
@@ -41,53 +43,53 @@ webui=webui
 action=action.sh
 ```
 
-Rules:
+ルール:
 
-- `id` must match `[A-Za-z][A-Za-z0-9._-]{1,63}`.
-- `banner` can point to `.png`, `.jpg`, `.jpeg`, or `.webp`.
-- If `banner` is omitted, Nightzuku checks `banner.png`, `banner.jpg`, `banner.jpeg`, then `banner.webp`.
-- If `webui` is omitted, Nightzuku checks `webroot`, `webui`, then `web`.
-- WebUI is available only when `<webui>/index.html` exists.
-- `action` defaults to `action.sh`.
-- `service.sh` is detected automatically.
+- `id` は `[A-Za-z][A-Za-z0-9._-]{1,63}` に一致する必要があります。
+- `banner` には `.png`、`.jpg`、`.jpeg`、`.webp` を指定できます。
+- `banner` を省略した場合、Nightzuku は `banner.png`、`banner.jpg`、`banner.jpeg`、`banner.webp` の順に確認します。
+- `webui` を省略した場合、Nightzuku は `webroot`、`webui`、`web` の順に確認します。
+- WebUI は `<webui>/index.html` が存在する場合にのみ利用できます。
+- `action` の既定値は `action.sh` です。
+- `service.sh` は自動的に検出されます。
 
-## Install Behavior
+## インストール時の動作
 
-Install flow:
+インストールの流れ:
 
-1. User selects a module ZIP with Android file picker.
-2. Nightzuku copies it into cache.
-3. Nightzuku validates `module.prop`.
-4. Nightzuku extracts into a staging directory.
-5. Nightzuku rejects unsafe paths.
-6. Nightzuku marks `.sh` files executable.
-7. Nightzuku replaces any existing module with the same `id`.
-8. Nightzuku stores the module under app-private storage.
+1. ユーザーが Android のファイル選択画面でモジュールの ZIP を選択します。
+2. Nightzuku が ZIP をキャッシュにコピーします。
+3. Nightzuku が `module.prop` を検証します。
+4. Nightzuku がステージング用ディレクトリに展開します。
+5. Nightzuku が安全でないパスを拒否します。
+6. Nightzuku が `.sh` ファイルに実行権限を付けます。
+7. Nightzuku が同じ `id` の既存モジュールを置き換えます。
+8. Nightzuku がモジュールをアプリのプライベートストレージに保存します。
 
-Safety limits:
+安全上の制限:
 
-- Max ZIP entries: `2048`.
-- Max extracted size: `200 MB`.
-- Script output retained in memory/log: last `64 KB` per stream.
-- Script timeout: `120 seconds`.
+- ZIP の最大エントリ数: `2048`。
+- 展開後の最大サイズ: `200 MB`。
+- メモリ／ログに保持されるスクリプト出力: ストリームごとに最後の `64 KB`。
+- スクリプトのタイムアウト: `120 秒`。
 
-## Runtime Environment
+## 実行環境
 
-Scripts run through Nightzuku server process creation. The command is:
+スクリプトは Nightzuku サーバーのプロセス生成機能を通じて実行されます。実行されるコマンドは次のとおりです:
 
 ```sh
 sh /path/to/module/action.sh
 ```
 
-or:
+または:
 
 ```sh
 sh /path/to/module/service.sh
 ```
 
-Working directory is the module directory.
+作業ディレクトリはモジュールのディレクトリです。
 
-Environment variables:
+環境変数:
 
 ```sh
 MODDIR=/data/user/0/kerneldroid.nightzuku/files/adb_modules/<id>
@@ -97,18 +99,18 @@ SHIZUKU_MODULE_MODE=safe|full
 SHIZUKU_MODULE_BACKGROUND=0|1
 ```
 
-Use `MODDIR` for all module-local files. Do not assume root paths such as `/data/adb/modules`.
+モジュール内のファイルには、すべて `MODDIR` を使用してください。`/data/adb/modules` のような root 向けのパスを前提にしないでください。
 
-## Actions
+## アクション
 
-`action.sh` is a manual user action launched from the module card.
+`action.sh` は、モジュールのカードからユーザーが手動で実行するアクションです。
 
-Action result:
-- stdout/stderr are shown in a dialog.
-- Last output is written to `logs/action-last.log` inside the module directory.
-- Timeout (120s) returns exit code `124`.
+アクションの結果:
+- stdout／stderr はダイアログに表示されます。
+- 最後の出力はモジュールディレクトリ内の `logs/action-last.log` に書き込まれます。
+- タイムアウト（120 秒）時は終了コード `124` を返します。
 
-Minimal `action.sh`:
+最小構成の `action.sh`:
 
 ```sh
 #!/system/bin/sh
@@ -116,39 +118,39 @@ echo "module=$SHIZUKU_MODULE_ID"
 id
 ```
 
-## Services
+## サービス
 
-`service.sh` is the background hook.
+`service.sh` はバックグラウンド用のフックです。
 
-Execution policy:
-- **Safe mode**: Blocked.
-- **Full access mode**: Allowed if "Allow background actions" is enabled.
-- Service scripts run once per Nightzuku binder session.
-- Last output is written to `logs/service-last.log`.
-- Timeout (120s) returns exit code `124`.
+実行ポリシー:
+- **セーフモード**: ブロックされます。
+- **フルアクセスモード**: 「バックグラウンドアクションを許可」が有効な場合に許可されます。
+- サービススクリプトは Nightzuku の binder セッションごとに 1 回実行されます。
+- 最後の出力は `logs/service-last.log` に書き込まれます。
+- タイムアウト（120 秒）時は終了コード `124` を返します。
 
 ## WebUI
 
-WebUI is loaded from `webui/index.html`.
+WebUI は `webui/index.html` から読み込まれます。
 
-Current WebView policy:
-- JavaScript, DOM storage, and local file access enabled.
-- Network access blocked unless Custom/Full mode enables it.
-- `window.Shizuku` is exposed for enabled module-local WebUI if policy allows.
+現在の WebView のポリシー:
+- JavaScript、DOM ストレージ、ローカルファイルへのアクセスが有効です。
+- ネットワークアクセスは、カスタム／フルアクセスモードで有効にしない限りブロックされます。
+- ポリシーで許可されている場合、有効なモジュールのローカル WebUI に `window.Shizuku` が公開されます。
 
-### JavaScript-to-Shell Bridge
+### JavaScript からシェルへのブリッジ
 
-The `window.Shizuku` object allows WebUI to interact with the shell.
+`window.Shizuku` オブジェクトを使うと、WebUI からシェルを操作できます。
 
-#### Module Info
+#### モジュール情報
 
 ```javascript
 const info = JSON.parse(window.Shizuku.getModuleInfo());
-console.log(info.id);         // e.g. "my-module"
+console.log(info.id);         // 例: "my-module"
 console.log(info.enabled);    // true
 ```
 
-#### Shell Execution
+#### シェルの実行
 
 ```javascript
 const result = JSON.parse(window.Shizuku.exec("id"));
@@ -157,7 +159,7 @@ if (result.ok) {
 }
 ```
 
-Advanced execution:
+詳細なオプション付きの実行:
 
 ```javascript
 const result = JSON.parse(window.Shizuku.execWithOptions("pwd", JSON.stringify({
@@ -166,39 +168,39 @@ const result = JSON.parse(window.Shizuku.execWithOptions("pwd", JSON.stringify({
 })));
 ```
 
-Rules:
-- `stdin` is limited to 64 KB.
-- stdout/stderr return the last 64 KB per stream.
-- `cwd` must be within the module directory.
+ルール:
+- `stdin` は 64 KB までです。
+- stdout／stderr はストリームごとに最後の 64 KB を返します。
+- `cwd` はモジュールのディレクトリ内である必要があります。
 
-### Full Trust
+### 完全信頼
 
-Full Trust is a per-module override. Long-press a module card to toggle.
+完全信頼（Full Trust）はモジュールごとの特別扱いの設定です。モジュールのカードを長押しして切り替えます。
 
-Trusted modules:
-- Bypass global Action/Service/Background/WebUI gates.
-- Skip ReCommand prompts.
-- Can use `download()` and WebView internet together.
+信頼されたモジュールは:
+- アクション／サービス／バックグラウンド／WebUI に関する全体の制限を受けません。
+- ReCommand の確認ダイアログが表示されません。
+- `download()` と WebView のインターネットアクセスを同時に使用できます。
 
-### WebUI Asset Loader
+### WebUI アセットローダー
 
-`window.Shizuku.download(url, relativeWebPath)` downloads HTTPS assets to the module WebUI root.
-- Max file size: 20 MB.
-- Cannot overwrite `index.html`.
+`window.Shizuku.download(url, relativeWebPath)` は、HTTPS のアセットをモジュールの WebUI ルートにダウンロードします。
+- 最大ファイルサイズ: 20 MB。
+- `index.html` は上書きできません。
 
-## Enable, Disable, Delete
+## 有効化、無効化、削除
 
-Disabling creates a `disable` file in the module directory, blocking actions and services. Deleting removes the entire module directory.
+無効にすると、モジュールのディレクトリに `disable` ファイルが作成され、アクションとサービスがブロックされます。削除すると、モジュールのディレクトリ全体が削除されます。
 
-## Test Module
+## テスト用モジュール
 
-The repository includes a test module:
+リポジトリにはテスト用モジュールが含まれています:
 
 ```text
 test-modules/adb-test-module.zip
 ```
 
-It contains:
+含まれるファイル:
 
 - `module.prop`
 - `banner.png`
@@ -206,31 +208,31 @@ It contains:
 - `service.sh`
 - `webui/index.html`
 
-Expected action output includes the current UID, SDK version, module id, and module mode.
+アクションを実行すると、現在の UID、SDK バージョン、モジュール ID、モジュールのモードが出力されます。
 
-## Current Scope
+## 現在の対応範囲
 
-Implemented:
+実装済み:
 
-- ZIP install.
-- Module metadata parsing.
-- Path traversal protection.
-- Size and entry limits.
-- Enable/disable/delete.
-- Banner rendering.
-- WebUI rendering.
-- HTTPS WebUI asset loading.
-- WebUI HTTPS file download into the module WebUI root.
-- Manual `action.sh`.
-- Policy-gated `service.sh`.
-- One service run per Nightzuku binder session.
-- Last action/service logs.
-- Direct JavaScript-to-shell bridge with optional timeout/stdin/cwd/env.
+- ZIP のインストール。
+- モジュールのメタデータ解析。
+- パストラバーサルの防止。
+- サイズとエントリ数の制限。
+- 有効化／無効化／削除。
+- バナーの表示。
+- WebUI の表示。
+- WebUI での HTTPS アセットの読み込み。
+- WebUI からモジュールの WebUI ルートへの HTTPS ファイルダウンロード。
+- 手動での `action.sh` 実行。
+- ポリシーで制御される `service.sh`。
+- Nightzuku の binder セッションごとに 1 回のサービス実行。
+- 最後のアクション／サービスのログ。
+- タイムアウト／stdin／cwd／env を指定できる、JavaScript からシェルへの直接ブリッジ。
 
-Not implemented:
+未実装:
 
-- Systemless filesystem overlays.
-- Magisk/KSU mount semantics.
-- Long-running service supervision.
+- システムレスなファイルシステムオーバーレイ。
+- Magisk/KSU のマウントの仕組み。
+- 常駐サービスの監視。
 
-Those are separate features and should not be implied by the current ADB module API.
+これらは別の機能であり、現在の ADB モジュール API で利用できるかのように扱うべきではありません。

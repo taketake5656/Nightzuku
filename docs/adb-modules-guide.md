@@ -1,29 +1,31 @@
-# ADB Modules Guide
+# ADB モジュール ガイド
 
-This guide is for module authors and testers. For the exact API contract, see
-[ADB Modules API reference](adb-modules-api.md).
+**日本語** | [English](adb-modules-guide.en.md)
 
-## What This System Is
+このガイドはモジュールの作者とテスター向けです。API の正確な仕様については
+[ADB モジュール API リファレンス](adb-modules-api.md) を参照してください。
 
-ADB Modules are ZIP packages installed into Nightzuku private storage and executed through
-the active Nightzuku server.
+## このシステムについて
 
-- ADB-started Nightzuku: scripts run with ADB shell privileges.
-- Root-started Nightzuku: scripts run with root privileges.
-- Safe mode: manual actions only.
-- Full access: allows stronger module behavior.
-- Background actions: required before `service.sh` can run.
+ADB モジュールは、Nightzuku のプライベートストレージにインストールされ、
+動作中の Nightzuku サーバーを通じて実行される ZIP パッケージです。
 
-This is a real module runner, not a visual stub. It installs ZIPs, parses metadata,
-stores module files, runs shell scripts through Nightzuku, opens local WebUI, tracks enabled
-state, deletes modules, and writes last-run logs.
+- ADB で起動した Nightzuku: スクリプトは ADB シェルの権限で実行されます。
+- root で起動した Nightzuku: スクリプトは root 権限で実行されます。
+- セーフモード: 手動のアクションのみ実行できます。
+- フルアクセス: より強力なモジュールの動作を許可します。
+- バックグラウンドアクション: `service.sh` を実行するには有効にする必要があります。
 
-It is not a Magisk/KSU systemless overlay implementation. There are no mount hooks,
-no `/data/adb/modules` compatibility promise, and no long-running daemon supervisor yet.
+これは見た目だけのスタブではなく、実際に動作するモジュールランナーです。ZIP のインストール、
+メタデータの解析、モジュールファイルの保存、Nightzuku を通じたシェルスクリプトの実行、
+ローカル WebUI の表示、有効状態の管理、モジュールの削除、最終実行ログの書き込みを行います。
 
-## Minimal Module
+Magisk/KSU のようなシステムレスオーバーレイの実装ではありません。マウントフックはなく、
+`/data/adb/modules` との互換性も保証しません。また、常駐デーモンの監視機能も現時点ではありません。
 
-Create this structure:
+## 最小構成のモジュール
+
+次の構成を作成します:
 
 ```text
 my-module/
@@ -53,18 +55,18 @@ echo "mode=$SHIZUKU_MODULE_MODE"
 id
 ```
 
-Package it:
+パッケージ化します:
 
 ```sh
 cd my-module
 zip -r ../my-module.zip .
 ```
 
-Install `my-module.zip` from the ADB Modules screen.
+「ADB モジュール」画面から `my-module.zip` をインストールします。
 
-## Optional Files
+## 任意のファイル
 
-Banner:
+バナー:
 
 ```text
 banner.png
@@ -76,13 +78,13 @@ WebUI:
 webui/index.html
 ```
 
-Background/service hook:
+バックグラウンド／サービスフック:
 
 ```text
 service.sh
 ```
 
-Custom paths can be declared in `module.prop`:
+独自のパスは `module.prop` で指定できます:
 
 ```properties
 banner=assets/banner.webp
@@ -91,11 +93,11 @@ usesShellBridge=true
 action=scripts/action.sh
 ```
 
-`usesShellBridge=true` is mandatory for WebUI pages that need `window.Shizuku`.
+`window.Shizuku` を必要とする WebUI ページでは、`usesShellBridge=true` の指定が必須です。
 
-## Script Environment
+## スクリプトの実行環境
 
-Scripts run from the module directory. Use these variables:
+スクリプトはモジュールのディレクトリで実行されます。次の変数を使用できます:
 
 ```sh
 MODDIR=/data/user/0/kerneldroid.nightzuku/files/adb_modules/<id>
@@ -106,51 +108,51 @@ SHIZUKU_MODULE_TRUSTED=0|1
 SHIZUKU_MODULE_BACKGROUND=0|1
 ```
 
-Do not hardcode Magisk/KSU paths. Use `$MODDIR`.
+Magisk/KSU のパスをハードコードしないでください。`$MODDIR` を使用してください。
 
-## Action vs Service
+## アクションとサービス
 
-Use `action.sh` for user-triggered commands.
+ユーザーが操作して実行するコマンドには `action.sh` を使用します。
 
-Use `service.sh` for background setup. It runs when:
-- The module is enabled.
-- Access mode is Full, or Custom with Service enabled.
-- Background actions are enabled in Settings.
-- Nightzuku binder is available.
+バックグラウンドでのセットアップには `service.sh` を使用します。次の条件をすべて満たすと実行されます:
+- モジュールが有効になっている。
+- アクセスモードがフルアクセス、またはサービスを有効にしたカスタムである。
+- 設定でバックグラウンドアクションが有効になっている。
+- Nightzuku の binder が利用可能である。
 
-The manager auto-runs enabled services once per binder session.
+マネージャーは、binder セッションごとに 1 回、有効なサービスを自動実行します。
 
-## Full Trust
+## 完全信頼
 
-Full Trust is a per-module override. Long-press a module card to toggle. Trusted modules bypass global policy gates while respecting core safety limits (timeouts, output caps).
+完全信頼（Full Trust）はモジュールごとの特別扱いの設定です。モジュールのカードを長押しして切り替えます。信頼されたモジュールは、基本的な安全上の制限（タイムアウト、出力の上限）は守りつつ、全体のポリシーによる制限を受けずに動作します。
 
-## Safety Limits
+## 安全上の制限
 
-- ZIP path traversal is rejected.
-- Max entries: `2048`.
-- Max extracted size: `200 MB`.
-- Script timeout: `120 seconds`.
-- Output retained: last `64 KB` per stdout/stderr stream.
+- ZIP 内のパストラバーサルは拒否されます。
+- 最大エントリ数: `2048`。
+- 展開後の最大サイズ: `200 MB`。
+- スクリプトのタイムアウト: `120 秒`。
+- 保持される出力: stdout／stderr それぞれ最後の `64 KB`。
 
-Timeout exit code is `124`.
+タイムアウト時の終了コードは `124` です。
 
-## Logs
+## ログ
 
-Logs are written inside the installed module directory:
+ログはインストールされたモジュールのディレクトリ内に書き込まれます:
 
 ```text
 logs/action-last.log
 logs/service-last.log
 ```
 
-Each log includes module id, script name, exit code, access mode, stdout, and stderr.
+各ログには、モジュール ID、スクリプト名、終了コード、アクセスモード、stdout、stderr が含まれます。
 
-## Test Module
+## テスト用モジュール
 
-The repository includes:
+リポジトリには次のファイルが含まれています:
 
 ```text
 test-modules/adb-test-module.zip
 ```
 
-Use it to verify install, enable/disable, Action, Service, WebUI, and banner rendering.
+インストール、有効化／無効化、アクション、サービス、WebUI、バナー表示の動作確認に使用してください。

@@ -1,87 +1,89 @@
-# GitHub Catalog
+# GitHub カタログ
 
-Online module discovery system for Nightzuku ADB modules.
+**日本語** | [English](github-catalog.en.md)
 
-## How It Works
+Nightzuku の ADB モジュールをオンラインで探すための仕組みです。
 
-Modules are discovered via GitHub Topics search (`topic:adb-modules`). Module authors tag their repos with this topic. No central registry required.
+## 仕組み
 
-**Flow:**
-1. User enters GitHub PAT (Personal Access Token) on first launch
-2. App searches GitHub: `GET /search/repositories?q=topic:adb-modules`
-3. Each repo is validated — checks for `module.prop` in root or subdirectories
-4. Modules are cached locally (6h TTL)
-5. User browses catalog, selects install mode (sources or release ZIP)
+モジュールは GitHub Topics の検索（`topic:adb-modules`）で見つけます。モジュールの作者は、自分のリポジトリにこのトピックを付けます。中央の登録所は必要ありません。
 
-## Module Limits
+**流れ:**
+1. 初回起動時に、ユーザーが GitHub の PAT（パーソナルアクセストークン）を入力します
+2. アプリが GitHub を検索します: `GET /search/repositories?q=topic:adb-modules`
+3. 各リポジトリを検証します（ルートまたはサブディレクトリに `module.prop` があるかを確認）
+4. モジュールをローカルにキャッシュします（有効期間 6 時間）
+5. ユーザーがカタログを閲覧し、インストール方法（ソースまたはリリース ZIP）を選択します
 
-- Max 4 modules per user (across all their repos)
-- Official owner (`kerneldroid`) is exempt from limits
-- Repos from users exceeding the limit are skipped during discovery
+## モジュール数の制限
 
-## Install Modes
+- 1 ユーザーあたり最大 4 モジュール（そのユーザーの全リポジトリの合計）
+- 公式のオーナー（`kerneldroid`）は制限の対象外です
+- 制限を超えたユーザーのリポジトリは、検索時にスキップされます
 
-**From Sources:**
-- Fetches files from GitHub Contents API
-- Resolves default branch dynamically (not hardcoded)
-- Builds clean ZIP: module.prop, *.sh, banner.*, webui/** (all files)
-- Installs via existing `AdbModuleManager.install()`
+## インストール方法
 
-**From Release ZIP:**
-- Downloads asset from GitHub Releases
-- Matches asset by module ID pattern
-- Installs directly
+**ソースから:**
+- GitHub Contents API からファイルを取得します
+- 既定のブランチを動的に判定します（ハードコードしません）
+- 必要なファイルだけで ZIP を作成します: module.prop、*.sh、banner.*、webui/**（全ファイル）
+- 既存の `AdbModuleManager.install()` でインストールします
 
-## Security
+**リリース ZIP から:**
+- GitHub Releases からアセットをダウンロードします
+- モジュール ID のパターンでアセットを照合します
+- そのままインストールします
 
-- Token stored in SharedPreferences (not encrypted — trade-off for emulator compatibility)
-- Token validated for `ghp_`/`github_pat_` prefix (30+ chars)
-- Token NOT logged to logcat
-- Token only sent to `api.github.com` / `github.com` domains (not leaked to updateJson URLs)
+## セキュリティ
 
-## Platform Support
+- トークンは SharedPreferences に保存されます（暗号化はしていません。エミュレーターとの互換性を優先したトレードオフです）
+- トークンは `ghp_`／`github_pat_` で始まり 30 文字以上かを検証します
+- トークンは logcat に記録されません
+- トークンは `api.github.com`／`github.com` のドメインにのみ送信されます（updateJson の URL には漏れません）
 
-| Platform | Catalog UI | Token Settings | Lab Menu |
+## 対応プラットフォーム
+
+| プラットフォーム | カタログ UI | トークン設定 | 試験運用機能メニュー |
 |----------|-----------|----------------|----------|
-| Phone | CatalogScreen.kt | UpdateSettingsScreen.kt | Via SettingsActivity |
+| スマートフォン | CatalogScreen.kt | UpdateSettingsScreen.kt | SettingsActivity から |
 | Android TV | TvCatalogScreen.kt | TvTokenSettingsScreen.kt | TvLabMenuScreen.kt |
-| WearOS | WearCatalogScreen.kt | WearTokenSettingsScreen.kt | Via WearSettingsScreen |
+| WearOS | WearCatalogScreen.kt | WearTokenSettingsScreen.kt | WearSettingsScreen から |
 
-## API Usage
+## API の利用
 
-- Unauthenticated: 60 req/hour (limited)
-- With PAT: 5,000 req/hour
-- Rate limit tracked across all API calls
-- ETag conditional requests used where possible (304 = free)
+- 認証なし: 60 リクエスト／時（制限あり）
+- PAT あり: 5,000 リクエスト／時
+- すべての API 呼び出しでレート制限を追跡します
+- 可能な場合は ETag による条件付きリクエストを使用します（304 はカウントされません）
 
-## Files
+## ファイル構成
 
 ```
 module/discovery/
-├── ModuleDiscoveryManager.kt   # Orchestrator: search → validate → cache
-├── ModuleValidator.kt          # module.prop validation + nested dir scan
-├── DiscoveredModule.kt         # Data class for discovered modules
-├── GitHubModels.kt             # GitHub API response models
-├── DiscoveryCache.kt           # SharedPreferences cache (6h TTL)
-└── RateLimitTracker.kt         # GitHub rate limit tracking
+├── ModuleDiscoveryManager.kt   # 全体の制御: 検索 → 検証 → キャッシュ
+├── ModuleValidator.kt          # module.prop の検証とサブディレクトリの走査
+├── DiscoveredModule.kt         # 見つかったモジュールのデータクラス
+├── GitHubModels.kt             # GitHub API のレスポンスモデル
+├── DiscoveryCache.kt           # SharedPreferences のキャッシュ（有効期間 6 時間）
+└── RateLimitTracker.kt         # GitHub のレート制限の追跡
 
 module/update/
-├── ModuleInstaller.kt          # Install flow (sources + release)
-├── SourceZipBuilder.kt         # Clean ZIP from source files
-├── UpdateChecker.kt            # Check for module updates
-├── UpdateResult.kt             # Update check result model
-├── UpdateSettingsScreen.kt     # Phone settings for updates
-└── GitHubReleaseModels.kt      # GitHub Release API models
+├── ModuleInstaller.kt          # インストール処理（ソース／リリース）
+├── SourceZipBuilder.kt         # ソースファイルから ZIP を作成
+├── UpdateChecker.kt            # モジュールのアップデート確認
+├── UpdateResult.kt             # アップデート確認結果のモデル
+├── UpdateSettingsScreen.kt     # スマートフォン向けのアップデート設定
+└── GitHubReleaseModels.kt      # GitHub Release API のモデル
 
 module/catalog/
-├── CatalogScreen.kt            # Phone catalog UI
-├── TvCatalogScreen.kt          # TV catalog UI
-├── WearCatalogScreen.kt        # WearOS catalog UI
-├── TokenStore.kt               # Token storage
-├── WearTokenSettingsScreen.kt  # WearOS token settings
-└── (TvTokenSettingsScreen.kt   # in settings/ package)
+├── CatalogScreen.kt            # スマートフォン向けカタログ UI
+├── TvCatalogScreen.kt          # TV 向けカタログ UI
+├── WearCatalogScreen.kt        # WearOS 向けカタログ UI
+├── TokenStore.kt               # トークンの保存
+├── WearTokenSettingsScreen.kt  # WearOS 向けトークン設定
+└── (TvTokenSettingsScreen.kt   # settings/ パッケージ内)
 
 settings/
-├── TvLabMenuScreen.kt          # TV Lab Features menu
-└── TvTokenSettingsScreen.kt    # TV token settings
+├── TvLabMenuScreen.kt          # TV 向け試験運用機能メニュー
+└── TvTokenSettingsScreen.kt    # TV 向けトークン設定
 ```
