@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="manager/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="128" alt="Yozuku icon" />
+</p>
+
 # Yozuku
 
 **日本語** | [English](README.en.md)
