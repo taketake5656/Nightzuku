@@ -7,7 +7,7 @@
 このプロジェクトは、Android 16/17 をターゲットとした安定性の確保など最新の Android プラットフォームの動向に追従しており、Jetpack Compose による刷新された Material 3 Expressive UI と、ADB ベースの ZIP モジュール実行機能を備えています。
 
 > [!NOTE]
-> このリポジトリ（[taketake5656/Nightzuku](https://github.com/taketake5656/Nightzuku)）は [kerneldroid/Nightzuku](https://github.com/kerneldroid/Nightzuku) のフォークで、アプリの日本語化を行っています。アプリの表示名は Yozuku ですが、パッケージ ID は Nightzuku と同じ `kerneldroid.nightzuku` のままです。署名が異なるため、kerneldroid 版の Nightzuku から上書きでインストールすることはできません。先にアンインストールしてください。
+> このリポジトリ（[taketake5656/Yozuku](https://github.com/taketake5656/Yozuku)）は [kerneldroid/Nightzuku](https://github.com/kerneldroid/Nightzuku) のフォークで、アプリの日本語化を行っています。アプリの表示名は Yozuku ですが、パッケージ ID は Nightzuku と同じ `kerneldroid.nightzuku` のままです。署名が異なるため、kerneldroid 版の Nightzuku から上書きでインストールすることはできません。先にアンインストールしてください。
 
 > [!IMPORTANT]
 > **移行時の対応が必要です:** パッケージ ID の変更（`moe.shizuku.privileged.api` → `kerneldroid.nightzuku`）に伴い、Yozuku をインストールする前に、旧公式 Shizuku Manager アプリを端末から**必ずアンインストール**してください。アンインストールしないと競合が発生します。
