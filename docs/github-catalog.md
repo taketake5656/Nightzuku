@@ -2,7 +2,7 @@
 
 **日本語** | [English](github-catalog.en.md)
 
-Nightzuku の ADB モジュールをオンラインで探すための仕組みです。
+Yozuku の ADB モジュールをオンラインで探すための仕組みです。
 
 ## 仕組み
 

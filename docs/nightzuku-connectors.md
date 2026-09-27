@@ -1,21 +1,21 @@
-# Nightzuku コネクタ API
+# Yozuku コネクタ API
 
 **日本語** | [English](nightzuku-connectors.en.md)
 
-Nightzuku コネクタは、「アクティベーター」と呼ばれるサードパーティ製アプリが、Nightzuku サーバーを端末上で起動するためのコマンドを安全に取得できるようにする実験的な機能です（**試験運用機能**で利用できます）。
+Yozuku コネクタは、「アクティベーター」と呼ばれるサードパーティ製アプリが、Yozuku サーバーを端末上で起動するためのコマンドを安全に取得できるようにする実験的な機能です（**試験運用機能**で利用できます）。
 
-## Nightzuku コネクタの目的
+## Yozuku コネクタの目的
 
-愛好家によって、PC や完全な root 権限なしで一時的に昇格した権限を得られる、ローカル権限昇格（LPE）の脆弱性（例: Dirty Pipe、FOTA の脆弱性、mktimer）が見つかることがあります。Nightzuku コネクタは、こうした「アクティベーター」（通常は 1MB 程度の小さな APK）が Nightzuku 内部の起動コマンドを取得し、それぞれの脆弱性を利用して端末上で直接 Nightzuku サーバーを起動するための、標準化されたインターフェースを提供します。
+愛好家によって、PC や完全な root 権限なしで一時的に昇格した権限を得られる、ローカル権限昇格（LPE）の脆弱性（例: Dirty Pipe、FOTA の脆弱性、mktimer）が見つかることがあります。Yozuku コネクタは、こうした「アクティベーター」（通常は 1MB 程度の小さな APK）が Yozuku 内部の起動コマンドを取得し、それぞれの脆弱性を利用して端末上で直接 Yozuku サーバーを起動するための、標準化されたインターフェースを提供します。
 
 ## 前提条件
 
 安全のため、この機能は**既定では無効**です。
-利用するには、Nightzuku の設定 →**試験運用機能**を開き、**Nightzuku コネクタ**を有効にして、安全に関する警告に同意する必要があります。
+利用するには、Yozuku の設定 →**試験運用機能**を開き、**Yozuku コネクタ**を有効にして、安全に関する警告に同意する必要があります。
 
 ## 使い方
 
-Nightzuku コネクタが有効な場合、Nightzuku は次の URI で、外部に公開されたローカルの `ContentProvider` を提供します:
+Yozuku コネクタが有効な場合、Yozuku は次の URI で、外部に公開されたローカルの `ContentProvider` を提供します:
 
 ```
 content://kerneldroid.nightzuku.connector
@@ -50,11 +50,11 @@ if [[ $OUTPUT == *"command="* ]]; then
     # 昇格した権限でコマンドを実行する
     eval "$CMD"
 else
-    echo "Nightzuku Connectors is not enabled or Nightzuku is not installed."
+    echo "Yozuku Connectors is not enabled or Yozuku is not installed."
 fi
 ```
 
 ### 戻り値
 
-- **Nightzuku コネクタ**が**有効**な場合、プロバイダは Nightzuku 内部のサーバーを起動するために必要な、完全なシェルコマンドの文字列を返します。
-- **Nightzuku コネクタ**が**無効**な場合（またはユーザーが警告に同意していない場合）、プロバイダはクライアントの問い合わせ方法に応じて、`null` または空の結果セットを返します。
+- **Yozuku コネクタ**が**有効**な場合、プロバイダは Yozuku 内部のサーバーを起動するために必要な、完全なシェルコマンドの文字列を返します。
+- **Yozuku コネクタ**が**無効**な場合（またはユーザーが警告に同意していない場合）、プロバイダはクライアントの問い合わせ方法に応じて、`null` または空の結果セットを返します。

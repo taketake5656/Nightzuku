@@ -1,13 +1,13 @@
-# Nightzuku
+# Yozuku
 
 [日本語](README.md) | **English**
 
-**Nightzuku** is a customized modern fork of **Shizuku**, maintained by kerneldroid. It provides a robust, high-performance interface for applications to use system APIs directly with elevated permissions (root/ADB).
+**Yozuku** is a Japanese-localized build of **Nightzuku**, kerneldroid's modern fork of **Shizuku**. The display name replaces "Night" with its Japanese reading "Yo" (夜); the package ID remains `kerneldroid.nightzuku`. It provides a robust, high-performance interface for applications to use system APIs directly with elevated permissions (root/ADB).
 
 This project tracks the latest Android platform developments, including Android 16/17 target stability, introduces a revamped Modern Material 3 Expressive UI using Jetpack Compose, and includes a full ADB-backed ZIP modules runner.
 
 > [!IMPORTANT]
-> **Migration Action Required:** Due to the package identity upgrade (`moe.shizuku.privileged.api` -> `kerneldroid.nightzuku`), you **MUST UNINSTALL** any older official Shizuku Manager app from your device before installing Nightzuku. Otherwise, they will conflict.
+> **Migration Action Required:** Due to the package identity upgrade (`moe.shizuku.privileged.api` -> `kerneldroid.nightzuku`), you **MUST UNINSTALL** any older official Shizuku Manager app from your device before installing Yozuku. Otherwise, they will conflict.
 Upstream project reference: <https://github.com/RikkaApps/Shizuku>
 
 ## Fork additions
@@ -23,7 +23,7 @@ Upstream project reference: <https://github.com/RikkaApps/Shizuku>
 
 - [ADB Modules guide](docs/adb-modules-guide.en.md)
 - [ADB Modules API reference](docs/adb-modules-api.en.md)
-- [Nightzuku Connectors API](docs/nightzuku-connectors.en.md)
+- [Yozuku Connectors API](docs/nightzuku-connectors.en.md)
 - [Android 17 Compatibility](docs/android-17-compatibility.en.md)
 - [Wear OS Compatibility](docs/wearos-compatibility.en.md)
 - [Wear OS Pairing Guide](docs/wearos-pairing.en.md)
@@ -35,15 +35,15 @@ Upstream project reference: <https://github.com/RikkaApps/Shizuku>
 
 When developing apps that require root, the standard approach is running commands in a `su` shell. This is slow, unreliable due to text processing, and limited to available commands. Even with ADB, apps often require root for privileged operations.
 
-Nightzuku provides a high-performance alternative by allowing apps to use system APIs directly with elevated permissions.
+Yozuku provides a high-performance alternative by allowing apps to use system APIs directly with elevated permissions.
 
-## How does Nightzuku work?
+## How does Yozuku work?
 
 Android uses `binder` for interprocess communication (IPC) between apps and the system server. The system server checks the UID/PID of the client to enforce permissions.
 
-Nightzuku guides users to start a Nightzuku server process with root or ADB. When an authorized app starts, it receives a binder to the Nightzuku server.
+Yozuku guides users to start a Yozuku server process with root or ADB. When an authorized app starts, it receives a binder to the Yozuku server.
 
-Nightzuku acts as a proxy, receiving requests from the app and forwarding them to the system server. This allows apps to use system APIs with the server's elevated permissions (root or ADB), making it almost identical to using system APIs directly.
+Yozuku acts as a proxy, receiving requests from the app and forwarding them to the system server. This allows apps to use system APIs with the server's elevated permissions (root or ADB), making it almost identical to using system APIs directly.
 
 ## Screenshots
 
@@ -109,7 +109,7 @@ Official API and samples are available at: <https://github.com/RikkaApps/Shizuku
 
 4. **Direct `transactRemote` Usage**: Signatures for hidden APIs change between Android versions. While `ShizukuBinderWrapper` handles most cases, direct transaction calls must be carefully verified against the target platform's AIDL definitions.
 
-## Developing Nightzuku
+## Developing Yozuku
 
 ### Build
 
@@ -122,7 +122,7 @@ The `:manager:assembleDebug` task generates a debuggable server. Ensure "Always 
 
 All code is licensed under Apache 2.0.
 
-- **Icon Usage**: You may not use `manager/src/main/res/mipmap*/ic_launcher*.png` for anything other than displaying Nightzuku.
+- **Icon Usage**: You may not use `manager/src/main/res/mipmap*/ic_launcher*.png` for anything other than displaying Yozuku.
 - **Identity**: You may not use `Shizuku` as an app name or use `moe.shizuku.privileged.api` as an application ID in derived works. The current package identity is `kerneldroid.nightzuku`.
 
 

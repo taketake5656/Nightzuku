@@ -2,11 +2,11 @@
 
 [日本語](android-tv-support.md) | **English**
 
-This document details the Android TV compatibility and UI enhancements introduced in Nightzuku.
+This document details the Android TV compatibility and UI enhancements introduced in Yozuku.
 
 ## Overview
 
-Nightzuku provides a first-class experience on Android TV devices, featuring a dedicated UI built with **Material 3 Expressive** components tailored for large screens and 10-foot interactions.
+Yozuku provides a first-class experience on Android TV devices, featuring a dedicated UI built with **Material 3 Expressive** components tailored for large screens and 10-foot interactions.
 
 ## Material 3 Expressive UI for TV
 
@@ -17,14 +17,14 @@ The Android TV interface is not a scaled version of the phone UI. It is a native
 
 ## Monet (Dynamic Color) Support
 
-On devices running Android 12 (SDK 31) and higher, Nightzuku supports **Monet (Dynamic Color)**:
+On devices running Android 12 (SDK 31) and higher, Yozuku supports **Monet (Dynamic Color)**:
 - The UI automatically extracts colors from the user's wallpaper or system theme.
 - This ensures visual consistency with the Android TV system UI and other modern TV applications.
 - Users can toggle Dynamic Color in the Settings menu.
 
 ## Black Night Theme
 
-Nightzuku includes a dedicated **Black Night Theme** optimized for OLED and high-contrast viewing:
+Yozuku includes a dedicated **Black Night Theme** optimized for OLED and high-contrast viewing:
 - Uses true black (`#000000`) backgrounds.
 - Reduces eye strain in dark environments.
 - Improves contrast for better legibility on various TV panel types.
@@ -47,7 +47,7 @@ Dialogs in **Settings** and **Modules** have been redesigned for TV:
 
 ## Package Identity
 
-All TV features respect the Nightzuku package identity:
+All TV features respect the Yozuku package identity:
 - Package Name: `kerneldroid.nightzuku`
 - Shared User ID: `kerneldroid.nightzuku.uid` (if applicable)
 

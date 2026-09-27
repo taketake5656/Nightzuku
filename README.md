@@ -1,16 +1,16 @@
-# Nightzuku
+# Yozuku
 
 **日本語** | [English](README.en.md)
 
-**Nightzuku** は、kerneldroid がメンテナンスしている **Shizuku** のカスタマイズ版モダンフォークです。アプリが昇格した権限（root / ADB）でシステム API を直接利用するための、堅牢で高性能なインターフェースを提供します。
+**Yozuku** は、kerneldroid による **Shizuku** のモダンフォーク **Nightzuku** を、日本語化したものです。「Night（夜）」を日本語の「夜（Yo）」に置き換えて、Yozuku という表示名にしています。アプリが昇格した権限（root / ADB）でシステム API を直接利用するための、堅牢で高性能なインターフェースを提供します。
 
 このプロジェクトは、Android 16/17 をターゲットとした安定性の確保など最新の Android プラットフォームの動向に追従しており、Jetpack Compose による刷新された Material 3 Expressive UI と、ADB ベースの ZIP モジュール実行機能を備えています。
 
 > [!NOTE]
-> このリポジトリ（[taketake5656/Nightzuku](https://github.com/taketake5656/Nightzuku)）は [kerneldroid/Nightzuku](https://github.com/kerneldroid/Nightzuku) のフォークで、アプリの日本語化を行っています。
+> このリポジトリ（[taketake5656/Nightzuku](https://github.com/taketake5656/Nightzuku)）は [kerneldroid/Nightzuku](https://github.com/kerneldroid/Nightzuku) のフォークで、アプリの日本語化を行っています。アプリの表示名は Yozuku ですが、パッケージ ID は Nightzuku と同じ `kerneldroid.nightzuku` のままです。署名が異なるため、kerneldroid 版の Nightzuku から上書きでインストールすることはできません。先にアンインストールしてください。
 
 > [!IMPORTANT]
-> **移行時の対応が必要です:** パッケージ ID の変更（`moe.shizuku.privileged.api` → `kerneldroid.nightzuku`）に伴い、Nightzuku をインストールする前に、旧公式 Shizuku Manager アプリを端末から**必ずアンインストール**してください。アンインストールしないと競合が発生します。
+> **移行時の対応が必要です:** パッケージ ID の変更（`moe.shizuku.privileged.api` → `kerneldroid.nightzuku`）に伴い、Yozuku をインストールする前に、旧公式 Shizuku Manager アプリを端末から**必ずアンインストール**してください。アンインストールしないと競合が発生します。
 
 アップストリームプロジェクト: <https://github.com/RikkaApps/Shizuku>
 
@@ -27,7 +27,7 @@
 
 - [ADB モジュール ガイド](docs/adb-modules-guide.md)
 - [ADB モジュール API リファレンス](docs/adb-modules-api.md)
-- [Nightzuku コネクタ API](docs/nightzuku-connectors.md)
+- [Yozuku コネクタ API](docs/nightzuku-connectors.md)
 - [Android 17 互換性](docs/android-17-compatibility.md)
 - [Wear OS 互換性](docs/wearos-compatibility.md)
 - [Wear OS ペア設定ガイド](docs/wearos-pairing.md)
@@ -39,15 +39,15 @@
 
 root が必要なアプリを開発する場合、一般的な方法は `su` シェルでコマンドを実行することです。しかしこの方法は遅く、テキスト処理に頼るため信頼性に欠け、利用できるコマンドにも制限されます。ADB を使う場合でも、特権操作には root が必要になることがよくあります。
 
-Nightzuku は、アプリが昇格した権限でシステム API を直接利用できるようにすることで、高性能な代替手段を提供します。
+Yozuku は、アプリが昇格した権限でシステム API を直接利用できるようにすることで、高性能な代替手段を提供します。
 
-## Nightzuku の仕組み
+## Yozuku の仕組み
 
 Android では、アプリとシステムサーバー間のプロセス間通信（IPC）に `binder` が使われます。システムサーバーは、クライアントの UID/PID を確認して権限を判定します。
 
-Nightzuku は、ユーザーが root または ADB で Nightzuku サーバープロセスを起動できるよう案内します。許可されたアプリが起動すると、そのアプリは Nightzuku サーバーへの binder を受け取ります。
+Yozuku は、ユーザーが root または ADB で Yozuku サーバープロセスを起動できるよう案内します。許可されたアプリが起動すると、そのアプリは Yozuku サーバーへの binder を受け取ります。
 
-Nightzuku はプロキシとして動作し、アプリからのリクエストを受け取ってシステムサーバーへ転送します。これにより、アプリはサーバーの昇格した権限（root または ADB）でシステム API を利用でき、システム API を直接使うのとほぼ同じ感覚で扱えます。
+Yozuku はプロキシとして動作し、アプリからのリクエストを受け取ってシステムサーバーへ転送します。これにより、アプリはサーバーの昇格した権限（root または ADB）でシステム API を利用でき、システム API を直接使うのとほぼ同じ感覚で扱えます。
 
 ## スクリーンショット
 
@@ -113,7 +113,7 @@ Nightzuku はプロキシとして動作し、アプリからのリクエスト�
 
 4. **`transactRemote` の直接利用**: 非公開 API のシグネチャは Android のバージョンによって変わります。ほとんどのケースは `ShizukuBinderWrapper` で対応できますが、トランザクションを直接呼び出す場合は、対象プラットフォームの AIDL 定義と照らし合わせて慎重に確認する必要があります。
 
-## Nightzuku の開発
+## Yozuku の開発
 
 ### ビルド
 
@@ -139,7 +139,7 @@ Nightzuku はプロキシとして動作し、アプリからのリクエスト�
 
 すべてのコードは Apache 2.0 ライセンスです。
 
-- **アイコンの使用**: `manager/src/main/res/mipmap*/ic_launcher*.png` を Nightzuku の表示以外の目的で使用することはできません。
+- **アイコンの使用**: `manager/src/main/res/mipmap*/ic_launcher*.png` を Yozuku の表示以外の目的で使用することはできません。
 - **名称と ID**: 派生物において、`Shizuku` をアプリ名として使用したり、`moe.shizuku.privileged.api` をアプリケーション ID として使用したりすることはできません。現在のパッケージ ID は `kerneldroid.nightzuku` です。
 
 

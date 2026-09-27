@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# TAPI - Termux API bridge for Nightzuku
+# TAPI - Termux API bridge for Yozuku
 # All commands use absolute /system/bin/ paths to avoid PATH issues on Android 13+.
 
 ANDROID_BIN=/system/bin
@@ -50,7 +50,7 @@ fi
 
 if [ ! -f "$DEX" ]; then
   echo "tapi: Cannot find rish_shizuku.dex" >&2
-  echo "Make sure Nightzuku is installed." >&2
+  echo "Make sure Yozuku is installed." >&2
   echo "tapi: PM=$PM APK=$apk_path" >&2
   exit 1
 fi

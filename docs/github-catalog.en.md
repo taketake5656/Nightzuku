@@ -2,7 +2,7 @@
 
 [日本語](github-catalog.md) | **English**
 
-Online module discovery system for Nightzuku ADB modules.
+Online module discovery system for Yozuku ADB modules.
 
 ## How It Works
 

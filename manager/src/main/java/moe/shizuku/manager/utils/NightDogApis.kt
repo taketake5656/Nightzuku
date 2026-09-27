@@ -5,7 +5,7 @@ import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuApiConstants
 
 /**
- * NightDog toggle over the Nightzuku server's custom binder transactions.
+ * NightDog toggle over the Yozuku server's custom binder transactions.
  * Transaction codes must match rikka.shizuku.server.ServerConstants.
  */
 object NightDogApis {
@@ -29,7 +29,7 @@ object NightDogApis {
     }
 
     fun setEnabled(enabled: Boolean) {
-        val binder = Shizuku.getBinder() ?: throw IllegalStateException("Nightzuku service is not running.")
+        val binder = Shizuku.getBinder() ?: throw IllegalStateException("Yozuku service is not running.")
         val data = Parcel.obtain()
         val reply = Parcel.obtain()
         try {

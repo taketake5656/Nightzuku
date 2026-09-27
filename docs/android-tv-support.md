@@ -2,11 +2,11 @@
 
 **日本語** | [English](android-tv-support.en.md)
 
-このドキュメントでは、Nightzuku で導入された Android TV への対応と UI の改良について説明します。
+このドキュメントでは、Yozuku で導入された Android TV への対応と UI の改良について説明します。
 
 ## 概要
 
-Nightzuku は Android TV 端末で本格的に使えるよう、大画面と離れた位置からの操作（10 フィート UI）に合わせた **Material 3 Expressive** コンポーネントによる専用 UI を備えています。
+Yozuku は Android TV 端末で本格的に使えるよう、大画面と離れた位置からの操作（10 フィート UI）に合わせた **Material 3 Expressive** コンポーネントによる専用 UI を備えています。
 
 ## TV 向け Material 3 Expressive UI
 
@@ -17,14 +17,14 @@ Android TV のインターフェースは、スマートフォンの UI を拡�
 
 ## Monet（ダイナミックカラー）への対応
 
-Android 12（SDK 31）以降の端末では、Nightzuku は **Monet（ダイナミックカラー）** に対応しています:
+Android 12（SDK 31）以降の端末では、Yozuku は **Monet（ダイナミックカラー）** に対応しています:
 - UI はユーザーの壁紙やシステムテーマから自動的に色を取得します。
 - これにより、Android TV のシステム UI や他の最新の TV アプリと見た目の一貫性が保たれます。
 - ダイナミックカラーは設定メニューで切り替えられます。
 
 ## ブラックナイトテーマ
 
-Nightzuku には、OLED や高コントラストでの視聴に最適化した専用の**ブラックナイトテーマ**があります:
+Yozuku には、OLED や高コントラストでの視聴に最適化した専用の**ブラックナイトテーマ**があります:
 - 真っ黒（`#000000`）な背景を使用します。
 - 暗い環境での目の疲れを軽減します。
 - さまざまな種類の TV パネルで、読みやすさのためにコントラストを高めます。
@@ -47,7 +47,7 @@ UI はリモコンでの操作を前提に設計されています:
 
 ## パッケージ ID
 
-すべての TV 機能は Nightzuku のパッケージ ID に従います:
+すべての TV 機能は Yozuku のパッケージ ID に従います:
 - パッケージ名: `kerneldroid.nightzuku`
 - 共有ユーザー ID: `kerneldroid.nightzuku.uid`（該当する場合）
 

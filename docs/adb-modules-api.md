@@ -1,10 +1,10 @@
-# Nightzuku ADB モジュール API
+# Yozuku ADB モジュール API
 
 **日本語** | [English](adb-modules-api.en.md)
 
-ADB モジュールは、Nightzuku アプリのプライベートストレージにインストールされ、現在動作中の Nightzuku サーバーを通じて実行される ZIP パッケージです。Nightzuku が ADB で起動されている場合、モジュールのスクリプトは ADB シェルの権限で実行されます。Nightzuku が root で起動されている場合は、root 権限で実行されます。
+ADB モジュールは、Yozuku アプリのプライベートストレージにインストールされ、現在動作中の Yozuku サーバーを通じて実行される ZIP パッケージです。Yozuku が ADB で起動されている場合、モジュールのスクリプトは ADB シェルの権限で実行されます。Yozuku が root で起動されている場合は、root 権限で実行されます。
 
-これは root のオーバーレイシステムではありません。アクション、WebUI、サービスフック、そして制御された ADB/root シェルアクセスのための、Nightzuku を基盤としたモジュールランナーです。
+これは root のオーバーレイシステムではありません。アクション、WebUI、サービスフック、そして制御された ADB/root シェルアクセスのための、Yozuku を基盤としたモジュールランナーです。
 
 ## パッケージ形式
 
@@ -47,8 +47,8 @@ action=action.sh
 
 - `id` は `[A-Za-z][A-Za-z0-9._-]{1,63}` に一致する必要があります。
 - `banner` には `.png`、`.jpg`、`.jpeg`、`.webp` を指定できます。
-- `banner` を省略した場合、Nightzuku は `banner.png`、`banner.jpg`、`banner.jpeg`、`banner.webp` の順に確認します。
-- `webui` を省略した場合、Nightzuku は `webroot`、`webui`、`web` の順に確認します。
+- `banner` を省略した場合、Yozuku は `banner.png`、`banner.jpg`、`banner.jpeg`、`banner.webp` の順に確認します。
+- `webui` を省略した場合、Yozuku は `webroot`、`webui`、`web` の順に確認します。
 - WebUI は `<webui>/index.html` が存在する場合にのみ利用できます。
 - `action` の既定値は `action.sh` です。
 - `service.sh` は自動的に検出されます。
@@ -58,13 +58,13 @@ action=action.sh
 インストールの流れ:
 
 1. ユーザーが Android のファイル選択画面でモジュールの ZIP を選択します。
-2. Nightzuku が ZIP をキャッシュにコピーします。
-3. Nightzuku が `module.prop` を検証します。
-4. Nightzuku がステージング用ディレクトリに展開します。
-5. Nightzuku が安全でないパスを拒否します。
-6. Nightzuku が `.sh` ファイルに実行権限を付けます。
-7. Nightzuku が同じ `id` の既存モジュールを置き換えます。
-8. Nightzuku がモジュールをアプリのプライベートストレージに保存します。
+2. Yozuku が ZIP をキャッシュにコピーします。
+3. Yozuku が `module.prop` を検証します。
+4. Yozuku がステージング用ディレクトリに展開します。
+5. Yozuku が安全でないパスを拒否します。
+6. Yozuku が `.sh` ファイルに実行権限を付けます。
+7. Yozuku が同じ `id` の既存モジュールを置き換えます。
+8. Yozuku がモジュールをアプリのプライベートストレージに保存します。
 
 安全上の制限:
 
@@ -75,7 +75,7 @@ action=action.sh
 
 ## 実行環境
 
-スクリプトは Nightzuku サーバーのプロセス生成機能を通じて実行されます。実行されるコマンドは次のとおりです:
+スクリプトは Yozuku サーバーのプロセス生成機能を通じて実行されます。実行されるコマンドは次のとおりです:
 
 ```sh
 sh /path/to/module/action.sh
@@ -125,7 +125,7 @@ id
 実行ポリシー:
 - **セーフモード**: ブロックされます。
 - **フルアクセスモード**: 「バックグラウンドアクションを許可」が有効な場合に許可されます。
-- サービススクリプトは Nightzuku の binder セッションごとに 1 回実行されます。
+- サービススクリプトは Yozuku の binder セッションごとに 1 回実行されます。
 - 最後の出力は `logs/service-last.log` に書き込まれます。
 - タイムアウト（120 秒）時は終了コード `124` を返します。
 
@@ -225,7 +225,7 @@ test-modules/adb-test-module.zip
 - WebUI からモジュールの WebUI ルートへの HTTPS ファイルダウンロード。
 - 手動での `action.sh` 実行。
 - ポリシーで制御される `service.sh`。
-- Nightzuku の binder セッションごとに 1 回のサービス実行。
+- Yozuku の binder セッションごとに 1 回のサービス実行。
 - 最後のアクション／サービスのログ。
 - タイムアウト／stdin／cwd／env を指定できる、JavaScript からシェルへの直接ブリッジ。
 

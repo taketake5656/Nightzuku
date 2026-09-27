@@ -143,7 +143,7 @@ class MainActivity : ComponentActivity() {
 
     private fun requestShizukuPermission() {
         if (!Shizuku.pingBinder()) {
-            Toast.makeText(this, "Error: Nightzuku is inactive.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error: Yozuku is inactive.", Toast.LENGTH_SHORT).show()
             return
         }
         try {
@@ -186,7 +186,7 @@ class MainActivity : ComponentActivity() {
                         details = "Shizuku service binder is alive and accessible.\nAPI Version: ${Shizuku.getVersion()}\nServer UID: ${Shizuku.getUid()}"
                     )
                 } else {
-                    throw IllegalStateException("Binder service is inactive. Make sure the Nightzuku server is running in the background.")
+                    throw IllegalStateException("Binder service is inactive. Make sure the Yozuku server is running in the background.")
                 }
             }
 
@@ -454,7 +454,7 @@ fun MinimalistDashboard(
         }
 
 
-        PlaqueContainerMinimal(title = "Nightzuku Service State", icon = Icons.Rounded.SettingsInputAntenna) {
+        PlaqueContainerMinimal(title = "Yozuku Service State", icon = Icons.Rounded.SettingsInputAntenna) {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),

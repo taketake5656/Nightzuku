@@ -16,7 +16,7 @@
 - `IPackageManager.getPackageInfo`
 - `IPackageManager.getApplicationInfo`
 
-Nightzuku はこれらの非公開 API に依存して動作するため、従来の実装は API 37 以降で `NoSuchMethodError` により失敗します。
+Yozuku はこれらの非公開 API に依存して動作するため、従来の実装は API 37 以降で `NoSuchMethodError` により失敗します。
 
 ## オリジナルの Shizuku（v13.6.0）
 
@@ -27,9 +27,9 @@ Nightzuku はこれらの非公開 API に依存して動作するため、従�
 - パッケージ一覧が空で返されるか、クライアントアプリでクラッシュが発生します。
 - システムサービスとのやり取りで、Logcat に `NoSuchMethodError` が頻繁に記録されます。
 
-## Nightzuku（モダン化したフォーク）
+## Yozuku（モダン化したフォーク）
 
-Nightzuku は `Android17Compat.java` によって、高性能な動的リフレクションのフォールバックを実装しています。
+Yozuku は `Android17Compat.java` によって、高性能な動的リフレクションのフォールバックを実装しています。
 
 ### 技術的な実装
 - **動的なメソッド解決:** 対象のメソッド（例: `grantRuntimePermission`）が新しい `deviceId` パラメータを必要とするかを判別し、必要な場合は `Context.DEVICE_ID_DEFAULT`（0）を渡します。
@@ -38,4 +38,4 @@ Nightzuku は `Android17Compat.java` によって、高性能な動的リフレ�
 
 ## まとめ
 
-オリジナルの Shizuku は、仮想デバイス API への移行により Android 17 と互換性がありません。Nightzuku の `Android17Compat` 層は完全な機能を取り戻し、最新の Android バージョンにおける昇格した権限でのアクセスの標準であり続けることを目指しています。
+オリジナルの Shizuku は、仮想デバイス API への移行により Android 17 と互換性がありません。Yozuku の `Android17Compat` 層は完全な機能を取り戻し、最新の Android バージョンにおける昇格した権限でのアクセスの標準であり続けることを目指しています。
